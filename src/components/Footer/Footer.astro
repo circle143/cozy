@@ -1,0 +1,110 @@
+---
+
+import styles from "./footer.module.scss";
+import {Icon} from "../../../node_modules/astro-icon/components"
+import { social } from "../../data/social";
+
+let address = `
+Terrace 
+Spectrum Metro Mall 
+Sector-75, 
+Noida
+Uttar Pradesh 201301
+`;
+
+let phone = "+91 8826284330";
+let email = "info@cozylounge.in";
+
+---
+<footer class={styles.footer}>
+    <div class={`container ${styles.footer_1}`}>
+        <div class={styles.item}>
+            <div>
+                <h2>Address</h2>
+            </div>
+            <div>
+                <p>{address}</p>
+            </div>
+        </div>
+        <div class={styles.item}>
+            <div>
+                <h2>Reservations</h2>
+            </div>
+            <div>
+                <a href={`tel:${phone}`}>{phone}</a>
+            </div>
+            <div>
+                <a href={`mailto:${email}`}>{email}</a>
+            </div>
+            <div>
+                <a href="">WhatsApp Us</a>
+            </div>
+        </div>
+        <div class={styles.item1}>
+            <div>
+                <div>
+                    <h2>Opening Hours</h2>
+                </div>
+                <div>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>Mon - Sun:</td>
+                                <td>12:00 pm - 1:00 am</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <h2>Connect with Us</h2>
+                </div>
+                <div class={styles.social}>
+                    <a
+							href={social.facebook}
+							target="_blank"
+							class={styles.facebook}
+						>
+							<Icon name="fa6-brands:facebook-f" />
+						</a>
+						<a
+							href={social.instagram}
+							target="_blank"
+							class={styles.instagram}
+						>
+							<Icon name="fa6-brands:instagram" />
+						</a>
+						<a
+							href={social.linkedin}
+							target="_blank"
+							class={styles.linkedin}
+						>
+							<Icon name="fa6-brands:linkedin-in" />
+						</a>
+                </div>
+            </div>
+        </div>
+        <div class={styles.item2}>
+            <div>
+                <h2>Keep in Touch</h2>
+            </div>
+            <div>
+                <p>Stay updated with our exclusive offers, special events, and new menu delights!</p>
+                <div>
+                    <input type="text" placeholder="Email"/>
+                    <button>Join</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div  class={`container ${styles.footer_2}`}>
+        <div>
+            <p>© 2024 Cozy-The Cafe Lounge. All rights reserved.</p>
+        </div>
+        <div>
+        <p>Powered by <a href="">Circle Digital Solutions</a></p>
+        </div>
+    </div>
+</footer>

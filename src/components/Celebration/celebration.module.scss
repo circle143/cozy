@@ -1,0 +1,41 @@
+.bg {
+    background-image: url(/home/celebration.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    color: var(--white);
+    .celebration {
+        padding-block: 2em;
+
+        display: grid;
+        gap: 2em;
+        text-align: center;
+
+        .heading {
+            margin: auto;
+            max-width: 70em;
+
+            h2 {
+                font-size: clamp(3rem, 3.75vi, 3.75rem);
+            }
+        }
+
+        p {
+            font-size: clamp(1rem, 1.5vi, 1.55rem);
+        }
+
+        a {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: auto;
+            width: 8em;
+
+            border-radius: 0.3em;
+            background-color: var(--gold);
+            color: var(--black);
+            text-decoration: none;
+
+            padding-block: 0.3em;
+        }
+    }
+}
