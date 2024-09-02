@@ -44,12 +44,18 @@
 	}
 
 	.nav {
+		display: none;
+
 		position: absolute;
 		width: min(90%, var(--max-width));
 		left: 50%;
 		translate: -50%;
 
 		grid-column: cozy-start;
+
+		@include ab.nav {
+			display: none;
+		}
 
 		@include ab.hero {
 			--_w: min(var(--max-width), calc(90 * var(--vw)));
@@ -58,9 +64,9 @@
 			translate: 0;
 
 			width: calc(100% - var(--_mi));
+			display: flex;
 		}
 
-		display: flex;
 		gap: 2rem;
 		align-items: center;
 		justify-content: space-between;
@@ -72,10 +78,6 @@
 		}
 
 		.links {
-			@include ab.nav {
-				display: none;
-			}
-
 			@include ab.hero {
 				padding-inline-end: clamp(1.5rem, 2.5vi, 2.5rem);
 			}
