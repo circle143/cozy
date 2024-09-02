@@ -1,0 +1,83 @@
+---
+import styles from "./hero.module.scss";
+
+const links = [
+	{
+		link: "/",
+		text: "Home",
+	},
+	{
+		link: "/menu",
+		text: "Menu",
+	},
+	{
+		link: "/gallery",
+		text: "Gallery",
+	},
+	{
+		link: "/reservation",
+		text: "Reservation",
+	},
+];
+---
+
+<div class={styles.hero}>
+	<nav class={styles.nav}>
+		<div class={styles.logo}>
+			<a href="/"><img src="/logo.svg" alt="Cozy Lounge" /> </a>
+		</div>
+
+		<div class={styles.links}>
+			<ul>
+				{
+					links.map((item) => {
+						return (
+							<li>
+								<a data-type="link" href={item.link}>
+									{item.text}
+								</a>
+							</li>
+						);
+					})
+				}
+			</ul>
+		</div>
+	</nav>
+
+	<div class={styles.cozy}>
+		<div>
+			<p class={`clash-display ${styles.subheading}`}>
+				Cozy- The Casual Lounge
+			</p>
+			<h1 class={`clash-display ${styles.heading}`}>
+				Where Comfort Meets Flavor
+			</h1>
+			<div class={styles.action}>
+				<a href="" data-type="button" data-variant="primary">
+					Book a Table
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div class={styles.menu}>
+		<div>
+			<h4 class="clash-display">Our Menu</h4>
+			<p>Delicious dishes for every palate.</p>
+		</div>
+	</div>
+
+	<div class={styles.delivery}>
+		<div>
+			<h4 class="clash-display">Delivery</h4>
+			<p>Fresh flavors delivered to you.</p>
+		</div>
+	</div>
+
+	<div class={styles.inside}>
+		<div>
+			<h4 class="clash-display">Inside Cozy Lounge</h4>
+			<p>Cozy ambiance, memorable dining experience.</p>
+		</div>
+	</div>
+</div>

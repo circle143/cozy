@@ -38,3 +38,15 @@
 		@content;
 	}
 }
+
+@mixin hero {
+	@include screen-64 {
+		@content;
+	}
+}
+
+@mixin nav {
+	@media (max-width: 48em) {
+		@content;
+	}
+}

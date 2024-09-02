@@ -2,11 +2,13 @@
 import Layout from "../layouts/Layout.astro";
 import Celebration from "../components/Celebration/Celebration.astro";
 import Offer from "../components/Offer/Offer.astro";
+import Hero from "../components/hero/Hero.astro";
 import Menu_home from "../components/Menu_home/Menu.astro"
 ---
 
 <Layout title="Cozy Lounge - Home">
+	<Hero />
 	<Offer />
 	<Menu_home/>
-	<!-- <Celebration /> -->
+	<Celebration />
 </Layout>
