@@ -2,8 +2,59 @@
 
 import styles from "./dish.module.scss"
 
+interface Props {
+  data: { dish_name: string; dish_img: string; dish_price: string; dish_content: string; }[][];
+  title1:string;
+button1:{
+    name:string,
+    file:string,
+};
+button2?:{
+    name:string,
+    file:string,
+};
+}
+
+const { button1,button2, title1,data } = Astro.props;
+
+const firstArray = data[0];
+const secondArray = data[1];
+
 ---
 
-<div>
-    <a href="./directory/yourfile.pdf" download>Download the pdf</a>
+<div >
+    <div>
+        <h2>{title1}</h2>
+    </div>
+    <div>
+        {firstArray.map((dish) => (
+            <div class={styles.dishItem}>
+                <img src={dish.dish_img} alt={dish.dish_name} />
+                <div>
+                    <div>
+                        <h3>{dish.dish_name}</h3>
+                        <p>{dish.dish_price}</p>
+                    </div>
+                    <p>{dish.dish_content}</p>
+                </div>
+            </div>
+        ))}
+        {secondArray.map((dish) => (
+           <div class={styles.dishItem}>
+                <img src={dish.dish_img} alt={dish.dish_name} />
+                <div>
+                    <div>
+                        <h3>{dish.dish_name}</h3>
+                        <p>{dish.dish_price}</p>
+                    </div>
+                    <p>{dish.dish_content}</p>
+                </div>
+            </div>
+        ))}
+    </div>
+    <a href={button1.file} >{button1.name}</a>
+    {button2 &&
+        <a href={button2.file} >{button2.name}</a>
+    }
+   
 </div>
