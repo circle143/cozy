@@ -1,0 +1,123 @@
+@use "/src/styles/abstracts" as ab;
+
+.hero {
+	display: grid;
+	gap: 2px;
+
+	grid-template-columns: [cozy-start menu-start delivery-start inside-start] 1fr;
+	grid-template-rows:
+		[cozy-start] 2fr
+		[cozy-end menu-start] 1fr
+		[menu-end delivery-start] 1fr
+		[delivery-end inside-start] 1fr;
+
+	@include ab.hero {
+		grid-template-columns:
+			[cozy-start] 8fr
+			[cozy-end menu-start delivery-start inside-start] 5fr;
+		grid-template-rows:
+			[cozy-start menu-start] 1fr
+			[menu-end delivery-start] 1fr
+			[delivery-end inside-start] 1fr;
+		min-height: 100vb;
+	}
+
+	h4 {
+		font-weight: 600;
+	}
+
+	p,
+	h1,
+	h4 {
+		color: var(--white);
+		font-size: clamp(1rem, 1.5vi, 1.25rem);
+	}
+
+	> div > div {
+		width: 90%;
+		margin-inline: auto;
+
+		@include ab.screen-40 {
+			width: 70%;
+		}
+	}
+
+	.cozy {
+		grid-area: cozy;
+		background-image: url("/home/hero-1.webp");
+		background-repeat: no-repeat;
+		background-size: cover;
+
+		text-align: center;
+		text-wrap: balance;
+
+		display: grid;
+		place-items: center;
+
+		@include ab.hero {
+			text-align: left;
+
+			> div {
+				--_w: min(var(--max-width), calc(90 * var(--vw)));
+				--_mi: calc((100 * var(--vw) - var(--_w)) / 2);
+
+				margin-inline-start: var(--_mi);
+
+				width: 100%;
+				max-width: calc(99% - var(--_mi));
+			}
+		}
+
+		> div {
+			display: grid;
+			gap: 1rem;
+		}
+
+		.subheading {
+			font-weight: 500;
+			font-size: clamp(1.25rem, 1.75vi, 1.5rem);
+		}
+
+		.heading {
+			font-size: clamp(3rem, 4vi, 3.75rem);
+		}
+	}
+
+	> :nth-child(n + 2) {
+		padding-block: 8rem;
+
+		p,
+		h4 {
+			text-align: center;
+			text-wrap: balance;
+		}
+
+		@include ab.hero {
+			padding-block: 5rem;
+
+			display: grid;
+			place-items: center;
+		}
+	}
+
+	.menu {
+		grid-area: menu;
+		background-image: url("/home/hero-2.webp");
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+
+	.delivery {
+		grid-area: delivery;
+		background-image: url("/home/hero-3.webp");
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+
+	.inside {
+		grid-area: inside;
+		background-image: url("/home/hero-4.webp");
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+}

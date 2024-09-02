@@ -38,3 +38,9 @@
 		@content;
 	}
 }
+
+@mixin hero {
+	@include screen-64 {
+		@content;
+	}
+}
