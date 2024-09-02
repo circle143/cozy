@@ -1,8 +1,49 @@
 ---
 import styles from "./hero.module.scss";
+
+const links = [
+	{
+		link: "/",
+		text: "Home",
+	},
+	{
+		link: "/menu",
+		text: "Menu",
+	},
+	{
+		link: "/gallery",
+		text: "Gallery",
+	},
+	{
+		link: "/reservation",
+		text: "Reservation",
+	},
+];
 ---
 
 <div class={styles.hero}>
+	<nav class={styles.nav}>
+		<div class={styles.logo}>
+			<a href="/"><img src="/logo.svg" alt="Cozy Lounge" /> </a>
+		</div>
+
+		<div class={styles.links}>
+			<ul>
+				{
+					links.map((item) => {
+						return (
+							<li>
+								<a data-type="link" href={item.link}>
+									{item.text}
+								</a>
+							</li>
+						);
+					})
+				}
+			</ul>
+		</div>
+	</nav>
+
 	<div class={styles.cozy}>
 		<div>
 			<p class={`clash-display ${styles.subheading}`}>

@@ -44,3 +44,9 @@
 		@content;
 	}
 }
+
+@mixin nav {
+	@media (max-width: 48em) {
+		@content;
+	}
+}

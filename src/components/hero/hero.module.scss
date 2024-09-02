@@ -3,6 +3,7 @@
 .hero {
 	display: grid;
 	gap: 2px;
+	position: relative;
 
 	grid-template-columns: [cozy-start menu-start delivery-start inside-start] 1fr;
 	grid-template-rows:
@@ -39,6 +40,62 @@
 
 		@include ab.screen-40 {
 			width: 70%;
+		}
+	}
+
+	.nav {
+		position: absolute;
+		width: min(90%, var(--max-width));
+		left: 50%;
+		translate: -50%;
+
+		grid-column: cozy-start;
+
+		@include ab.hero {
+			--_w: min(var(--max-width), calc(90 * var(--vw)));
+			--_mi: calc((100 * var(--vw) - var(--_w)) / 2);
+			left: var(--_mi);
+			translate: 0;
+
+			width: calc(100% - var(--_mi));
+		}
+
+		display: flex;
+		gap: 2rem;
+		align-items: center;
+		justify-content: space-between;
+
+		.logo {
+			@include ab.nav {
+				width: 10rem;
+			}
+		}
+
+		.links {
+			@include ab.nav {
+				display: none;
+			}
+
+			@include ab.hero {
+				padding-inline-end: clamp(1.5rem, 2.5vi, 2.5rem);
+			}
+
+			ul {
+				--_c: var(--white);
+
+				list-style-type: none;
+				padding: 0;
+				margin: 0;
+				display: flex;
+				gap: clamp(2rem, 3vi, 3rem);
+
+				li {
+					a {
+						font-weight: 600;
+						font-size: 1.25rem;
+					}
+				}
+			}
 		}
 	}
 
@@ -83,7 +140,7 @@
 		}
 	}
 
-	> :nth-child(n + 2) {
+	> :nth-child(n + 3) {
 		padding-block: 8rem;
 
 		p,
