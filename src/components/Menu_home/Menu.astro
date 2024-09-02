@@ -4,7 +4,7 @@ import styles from "./menu.module.scss"
 import Dish from "../Dish/Dish.astro"
 
 const dish = [
-    [
+    
         {
             dish_name: "Butter Chicken",
             dish_img: "/home/dish.png",
@@ -35,14 +35,6 @@ const dish = [
             dish_price: "₹690",
             dish_content: "dishes with a touch of casual elegancset in a warm and inviting atmosphere.",
         },
-    ],
-    [
-    {
-            dish_name: "Butter Chicken",
-            dish_img: "/home/dish.png",
-            dish_price: "₹690",
-            dish_content: "dishes with a touch of casual elegancset in a warm and inviting atmosphere.",
-        },
         {
             dish_name: "Butter Chicken",
             dish_img: "/home/dish.png",
@@ -67,10 +59,17 @@ const dish = [
             dish_price: "₹690",
             dish_content: "dishes with a touch of casual elegancset in a warm and inviting atmosphere.",
         },
-    ]
+        {
+            dish_name: "Butter Chicken",
+            dish_img: "/home/dish.png",
+            dish_price: "₹690",
+            dish_content: "dishes with a touch of casual elegancset in a warm and inviting atmosphere.",
+        },
+    
+   
 ];
 
-const title1="Menu";
+const title1="Our Menu";
 
 const button1={
 name:"Download Our Food Menu",
@@ -84,8 +83,8 @@ file:"",
 
 ---
 
-<div>
-    <div class={`container ${styles.menu}`}>
+<div class={styles.menu}>
+    <div class="container ">
         <Dish button2={button2} button1={button1} title1 ={title1} data = {dish}/>
     </div>
 </div>

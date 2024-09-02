@@ -3,7 +3,7 @@
 import styles from "./dish.module.scss"
 
 interface Props {
-  data: { dish_name: string; dish_img: string; dish_price: string; dish_content: string; }[][];
+  data: { dish_name: string; dish_img: string; dish_price: string; dish_content: string; }[];
   title1:string;
 button1:{
     name:string,
@@ -17,44 +17,50 @@ button2?:{
 
 const { button1,button2, title1,data } = Astro.props;
 
-const firstArray = data[0];
-const secondArray = data[1];
+const color = "#fff1d3";
 
 ---
 
 <div >
     <div>
-        <h2>{title1}</h2>
+        <h2 class={`clash-display ${styles.heading}`}>{title1}</h2>
     </div>
-    <div>
-        {firstArray.map((dish) => (
+    <div class={styles.dish}>
+        {data.map((dish) => (
             <div class={styles.dishItem}>
-                <img src={dish.dish_img} alt={dish.dish_name} />
-                <div>
-                    <div>
-                        <h3>{dish.dish_name}</h3>
-                        <p>{dish.dish_price}</p>
-                    </div>
-                    <p>{dish.dish_content}</p>
+                <div class={styles.img}>
+                    <img src={dish.dish_img} alt={dish.dish_name} />
                 </div>
-            </div>
-        ))}
-        {secondArray.map((dish) => (
-           <div class={styles.dishItem}>
-                <img src={dish.dish_img} alt={dish.dish_name} />
-                <div>
-                    <div>
-                        <h3>{dish.dish_name}</h3>
-                        <p>{dish.dish_price}</p>
-                    </div>
+                <div class={styles.dish_content}>
+                    {button2 && 
+                        <div class={styles.dish_name} >
+                            <div class={styles.bg1}>
+                                <h3>{dish.dish_name}</h3>
+                            </div>
+                            <div class={styles.bg1}>
+                                <p>{dish.dish_price}</p>
+                            </div>
+                        </div>
+                    }
+                    {!button2 && 
+                        <div class={styles.dish_name} >
+                            <div class={styles.bg2}>
+                                <h3>{dish.dish_name}</h3>
+                            </div>
+                            <div class={styles.bg2}>
+                                <p>{dish.dish_price}</p>
+                            </div>
+                        </div>
+                    }
                     <p>{dish.dish_content}</p>
                 </div>
             </div>
         ))}
     </div>
-    <a href={button1.file} >{button1.name}</a>
-    {button2 &&
-        <a href={button2.file} >{button2.name}</a>
-    }
-   
+    <div class={styles.action}>
+        <a href={button1.file} data-type="button" data-variant="primary">{button1.name}</a>
+        {button2 &&
+            <a href={button2.file} data-type="button" data-variant="primary">{button2.name}</a>
+        }
+    </div>
 </div>
