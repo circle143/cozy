@@ -2,42 +2,46 @@
 @use "./abstracts/reset";
 
 :root {
-    --white: #ffffff;
-    --black: #000000;
+	--white: #ffffff;
+	--black: #000000;
 
-    --text: var(--black);
+	--text: var(--black);
 
-    --gold: #d0ad67;
+	--gold: #d0ad67;
 
-    --max-width: 78rem;
-    --max-width-wide: 90rem;
+	--max-width: 78rem;
+	--max-width-wide: 90rem;
 
-    --linkedin: #0077b5;
-    --twitterx: #333333;
-    --facebook: #4867aa;
-    --whatsapp: #25d366;
-    --instagram: linear-gradient(
-        #6559ca,
-        #bc318f 30%,
-        #e33f5f 50%,
-        #f77638 70%,
-        #fec66d 100%
-    );
+	--linkedin: #0077b5;
+	--twitterx: #333333;
+	--facebook: #4867aa;
+	--whatsapp: #25d366;
+	--instagram: linear-gradient(
+		#6559ca,
+		#bc318f 30%,
+		#e33f5f 50%,
+		#f77638 70%,
+		#fec66d 100%
+	);
 
-    --overlay: hsla(0, 0%, 0%, 0.75);
+	--overlay: hsla(0, 0%, 0%, 0.75);
 }
 
 body {
-    font-family: "Inter", sans-serif;
-    font-optical-sizing: auto;
+	font-family: "Satoshi";
+	font-optical-sizing: auto;
 
-    background-color: var(--white);
-    color: var(--text);
+	background-color: var(--white);
+	color: var(--text);
+}
+
+.clash-display {
+	font-family: "Clash Display";
 }
 
 .container {
-    width: min(90%, var(--max-width));
-    margin-inline: auto;
+	width: min(90%, var(--max-width));
+	margin-inline: auto;
 }
 
 // .container-wide {
