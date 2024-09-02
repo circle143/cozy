@@ -6,10 +6,10 @@
 
 	grid-template-columns: [cozy-start menu-start delivery-start inside-start] 1fr;
 	grid-template-rows:
-		[cozy-start] 2fr
-		[cozy-end menu-start] 1fr
-		[menu-end delivery-start] 1fr
-		[delivery-end inside-start] 1fr;
+		[cozy-start] 5fr
+		[cozy-end menu-start] 2fr
+		[menu-end delivery-start] 2fr
+		[delivery-end inside-start] 2fr;
 
 	@include ab.hero {
 		grid-template-columns:
