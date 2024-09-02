@@ -1,5 +1,7 @@
 @use "./abstracts" as ab;
 @use "./abstracts/reset";
+@use "./abstracts/button-links";
+@use "./abstracts/fonts";
 
 :root {
 	--white: #ffffff;
@@ -11,6 +13,15 @@
 
 	--max-width: 78rem;
 	--max-width-wide: 90rem;
+
+	--accent: var(--gold);
+	--accent-hover: hsl(from var(--accent) h s calc(l + 5));
+	--accent-active: hsl(from var(--accent) h s calc(l - 10));
+
+	// error
+	--error: #dc0000;
+	--error-hover: hsl(from var(--error) h s calc(l + 10));
+	--error-active: hsl(from var(--error) h s calc(l - 10));
 
 	--linkedin: #0077b5;
 	--twitterx: #333333;
@@ -57,6 +68,12 @@ body {
 // 	font-size: clamp(2.25rem, 4.5vi, 4rem);
 // }
 
-// h2 {
-// 	font-size: clamp(1.75rem, 4vi, 3.5rem);
-// }
+h2 {
+	font-weight: 600;
+
+	font-size: clamp(3rem, 4vi, 3.75rem);
+}
+
+.text {
+	font-size: clamp(1rem, 1.75vi, 1.5rem);
+}

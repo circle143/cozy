@@ -30,5 +30,25 @@ const { title } = Astro.props;
 			<Footer />
 		</div>
 	</body>
+	<script>
+		new ResizeObserver(() => {
+			let vw = document.documentElement.clientWidth / 100;
+			document.documentElement.style.setProperty("--vw", `${vw}px`);
+		}).observe(document.documentElement);
+	</script>
+	<style>
+		div {
+			display: flex;
+			flex-direction: column;
+			min-height: 100vb;
+		}
+
+		main {
+			display: grid;
+			gap: clamp(3em, 4vi, 4em);
+
+			margin-block-end: clamp(3em, 5vi, 5em);
+		}
+	</style>
 </html>
 <style is:global></style>
