@@ -34,16 +34,8 @@
 		font-size: clamp(1rem, 1.5vi, 1.25rem);
 	}
 
-	> div > div {
-		width: 90%;
-		margin-inline: auto;
-
-		@include ab.screen-40 {
-			width: 70%;
-		}
-	}
-
 	.nav {
+		z-index: 1;
 		display: none;
 
 		position: absolute;
@@ -52,6 +44,9 @@
 		translate: -50%;
 
 		grid-column: cozy-start;
+		gap: 2rem;
+		align-items: center;
+		justify-content: space-between;
 
 		@include ab.nav {
 			display: none;
@@ -60,16 +55,13 @@
 		@include ab.hero {
 			--_w: min(var(--max-width), calc(90 * var(--vw)));
 			--_mi: calc((100 * var(--vw) - var(--_w)) / 2);
+
 			left: var(--_mi);
 			translate: 0;
 
 			width: calc(100% - var(--_mi));
 			display: flex;
 		}
-
-		gap: 2rem;
-		align-items: center;
-		justify-content: space-between;
 
 		.logo {
 			@include ab.nav {
@@ -101,11 +93,40 @@
 		}
 	}
 
+	> div {
+		position: relative;
+		overflow: hidden;
+
+		&:hover {
+			img {
+				scale: 1.1;
+			}
+		}
+
+		img {
+			position: absolute;
+			object-fit: cover;
+			z-index: -1;
+			inset: 0;
+
+			width: 100%;
+			height: 100%;
+
+			transition: scale 200ms;
+		}
+
+		> div {
+			width: 90%;
+			margin-inline: auto;
+
+			@include ab.screen-40 {
+				width: 70%;
+			}
+		}
+	}
+
 	.cozy {
 		grid-area: cozy;
-		background-image: url("/home/hero-1.webp");
-		background-repeat: no-repeat;
-		background-size: cover;
 
 		text-align: center;
 		text-wrap: balance;
@@ -161,22 +182,13 @@
 
 	.menu {
 		grid-area: menu;
-		background-image: url("/home/hero-2.webp");
-		background-repeat: no-repeat;
-		background-size: cover;
 	}
 
 	.delivery {
 		grid-area: delivery;
-		background-image: url("/home/hero-3.webp");
-		background-repeat: no-repeat;
-		background-size: cover;
 	}
 
 	.inside {
 		grid-area: inside;
-		background-image: url("/home/hero-4.webp");
-		background-repeat: no-repeat;
-		background-size: cover;
 	}
 }
