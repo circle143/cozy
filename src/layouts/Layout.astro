@@ -1,6 +1,7 @@
 ---
 import "../styles/main.scss";
 import Footer from "../components/Footer/Footer.astro";
+import Nav from "../components/nav/Nav.astro";
 
 interface Props {
 	title: string;
@@ -23,6 +24,7 @@ const { title } = Astro.props;
 	</head>
 	<body>
 		<div>
+			<Nav title={title} />
 			<main>
 				<slot />
 			</main>

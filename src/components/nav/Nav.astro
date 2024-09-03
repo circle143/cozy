@@ -1,0 +1,59 @@
+---
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+
+import styles from "./nav.module.scss";
+
+const links = [
+	{
+		link: "/",
+		text: "Home",
+	},
+	{
+		link: "/menu",
+		text: "Menu",
+	},
+	{
+		link: "/gallery",
+		text: "Gallery",
+	},
+	{
+		link: "/reservation",
+		text: "Reservation",
+	},
+];
+---
+
+<nav class={styles.nav} data-page={title}>
+	<div class={`container ${styles.container}`}>
+		<div class={styles.logo}>
+			<a href="/"><img src="/logo.svg" alt="Cozy Lounge" /> </a>
+		</div>
+
+		<div class={styles.links}>
+			<div class={styles.control}>
+				<input id="nav" type="checkbox" />
+				<label for="nav">
+					<span></span>
+				</label>
+			</div>
+
+			<ul>
+				{
+					links.map((item) => {
+						return (
+							<li>
+								<a data-type="link" href={item.link}>
+									{item.text}
+								</a>
+							</li>
+						);
+					})
+				}
+			</ul>
+		</div>
+	</div>
+</nav>

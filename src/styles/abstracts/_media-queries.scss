@@ -46,7 +46,7 @@
 }
 
 @mixin nav {
-	@media (max-width: 48em) {
+	@media (min-width: 48em) {
 		@content;
 	}
 }

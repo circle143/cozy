@@ -1,0 +1,177 @@
+@use "/src/styles/abstracts" as ab;
+
+.nav {
+	&[data-page="Cozy Lounge - Home"] {
+		@include ab.hero {
+			display: none;
+		}
+	}
+
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 10;
+
+	.container {
+		display: flex;
+		gap: 2rem;
+		align-items: center;
+		justify-content: space-between;
+
+		.logo {
+			width: clamp(6rem, 20vi, 12rem);
+		}
+
+		.links {
+			&:has(input:checked) {
+				ul {
+					clip-path: inset(0);
+				}
+
+				.control {
+					position: fixed;
+					right: 5%;
+					z-index: 12;
+				}
+			}
+			.control {
+				@include ab.nav {
+					display: none;
+				}
+
+				input {
+					display: none;
+				}
+
+				label {
+					z-index: 11;
+					display: flex;
+					align-items: center;
+					position: relative;
+
+					span {
+						--_bg: var(--accent);
+
+						display: inline-block;
+						background-color: var(--_bg);
+						width: 2rem;
+						height: 3px;
+						position: relative;
+						border-radius: 10px;
+
+						transition:
+							rotate 300ms,
+							translate 300ms;
+
+						&::before,
+						&::after {
+							border-radius: inherit;
+							content: "";
+							position: absolute;
+
+							inset: 0;
+
+							background-color: var(--_bg);
+							transition:
+								rotate 300ms,
+								translate 300ms,
+								opacity 100ms;
+						}
+
+						&::before {
+							translate: 0 -8px;
+						}
+
+						&::after {
+							translate: 0 8px;
+						}
+					}
+				}
+
+				input:checked + label {
+					span {
+						rotate: -45deg;
+
+						&::before {
+							rotate: 90deg;
+							translate: 0 -1px;
+						}
+
+						&::after {
+							opacity: 0;
+						}
+					}
+				}
+
+				@include ab.nav {
+					display: none;
+				}
+			}
+
+			ul {
+				--_c: var(--black);
+				--_bg: var(--light-gold);
+
+				overflow: auto;
+				overscroll-behavior: contain;
+				list-style-type: none;
+				padding: 0;
+				margin: 0;
+
+				position: fixed;
+				inset: 0;
+				background-color: var(--_bg);
+
+				display: flex;
+				gap: 1em;
+				flex-direction: column;
+
+				clip-path: inset(0 100% 0 0);
+				transition: clip-path 300ms;
+				padding-inline: 2.5rem;
+				padding-block: 5rem;
+
+				&::before {
+					content: "";
+					position: absolute;
+					background-image: url("/logo.svg");
+					width: 10rem;
+					height: 10rem;
+
+					bottom: 5%;
+					left: 5%;
+
+					@include ab.nav {
+						display: none;
+					}
+				}
+
+				@include ab.nav {
+					--_bg: transparent;
+
+					position: static;
+					gap: clamp(2rem, 3vi, 3rem);
+					flex-direction: row;
+
+					clip-path: none;
+					padding: 0;
+					overflow: visible;
+				}
+
+				li {
+					a {
+						font-weight: 700;
+						font-size: 1.25rem;
+
+						color: var(--_c);
+
+						@include ab.nav {
+							--_c: var(--white);
+						}
+					}
+				}
+			}
+		}
+	}
+}
