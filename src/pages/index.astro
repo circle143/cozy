@@ -1,14 +1,16 @@
 ---
+import Celebration from "@components/home/Celebration/Celebration.astro";
+import Hero from "@components/home/hero/Hero.astro";
+import Offer from "@components/home/Offer/Offer.astro";
+import MenuHome from "@components/home/MenuHome/Menu.astro";
+import Reserve from "@components/reserve/Reserve";
 import Layout from "../layouts/Layout.astro";
-import Celebration from "../components/Celebration/Celebration.astro";
-import Offer from "../components/Offer/Offer.astro";
-import Hero from "../components/hero/Hero.astro";
-import Menu_home from "../components/Menu_home/Menu.astro"
 ---
 
 <Layout title="Cozy Lounge - Home">
 	<Hero />
 	<Offer />
-	<Menu_home/>
+	<MenuHome />
 	<Celebration />
+	<Reserve />
 </Layout>
