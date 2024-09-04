@@ -1,82 +1,93 @@
 @use "/src/styles/abstracts" as ab;
 
 .heading {
-    text-align: center;
+	text-align: center;
 }
 .dish {
-    padding-block: 3em;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    column-gap: clamp(0.5em, 1.5vi, 1.5em);
-    row-gap: clamp(2em, 3vi, 3em);
+	padding-block: 3em;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	column-gap: clamp(0.5em, 1.5vi, 1.5em);
+	row-gap: clamp(2em, 3vi, 3em);
 
-    @include ab.screen-64 {
-        grid-template-columns: repeat(auto-fit, minmax(405px, 1fr));
-    }
+	@include ab.screen-64 {
+		grid-template-columns: repeat(auto-fit, minmax(405px, 1fr));
+	}
 
-    &Item {
-        // outline: 2px solid red;
-        display: flex;
-        gap: clamp(0.5em, 1.5vi, 1.5em);
+	&Item {
+		// outline: 2px solid red;
+		display: flex;
+		gap: clamp(0.5em, 1.5vi, 1.5em);
 
-        .img {
-            display: flex;
-            align-items: center;
-            img {
-                width: clamp(4em, 4.5vi, 4.5em);
-                aspect-ratio: 1/1;
-                // outline: 2px solid blue;
-            }
-        }
+		.img {
+			display: flex;
+			align-items: center;
+			img {
+				width: clamp(4em, 4.5vi, 4.5em);
+				aspect-ratio: 1/1;
+				// outline: 2px solid blue;
+			}
+		}
 
-        .dish_content {
-            width: 100%;
-            p {
-                font-size: clamp(1rem, 1.25vi, 1.25rem);
-                font-style: italic;
-            }
-            .dish_name {
-                display: flex;
-                align-items: flex-end;
-                justify-content: space-between;
-                position: relative;
+		.dish_content {
+			width: 100%;
+			p {
+				font-size: clamp(1rem, 1.25vi, 1.25rem);
+				font-style: italic;
+			}
+			.dish_name {
+				display: flex;
+				align-items: flex-end;
+				justify-content: space-between;
+				position: relative;
 
-                h3 {
-                    font-size: clamp(1.2rem, 1.5vi, 1.5rem);
-                    font-weight: 500;
-                }
-                p {
-                    font-size: clamp(1.2rem, 1.5vi, 1.5rem);
-                }
+				h3 {
+					font-size: clamp(1.2rem, 1.5vi, 1.5rem);
+					font-weight: 500;
+				}
+				p {
+					font-size: clamp(1.2rem, 1.5vi, 1.5rem);
+				}
 
-                > div {
-                    z-index: 3;
-                }
+				> div {
+					z-index: 3;
+				}
 
-                .bg1 {
-                    background-color: var(--light-gold);
-                }
+				.bg1 {
+					background-color: var(--light-gold);
+				}
 
-                .bg2 {
-                    background-color: var(--white);
-                }
+				.bg2 {
+					background-color: var(--white);
+				}
 
-                &::before {
-                    content: "";
-                    width: 100%;
-                    // outline: 2px solid blue;
-                    position: absolute;
-                    bottom: 0.3em;
-                    z-index: 2;
+				&::before {
+					content: "";
+					width: 100%;
+					// outline: 2px solid blue;
+					position: absolute;
+					bottom: 0.3em;
+					z-index: 2;
 
-                    border: 0.02em dashed var(--black);
-                }
-            }
-        }
-    }
+					border: 0.02em dashed var(--black);
+				}
+			}
+		}
+	}
 }
 .action {
-    display: flex;
-    justify-content: center;
-    gap: 1em;
+	// display: flex;
+	// justify-content: center;
+	// flex-wrap: wrap;
+	// gap: 1em;
+
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(18.5rem, max-content));
+	gap: 2em;
+
+	justify-content: center;
+
+	a {
+		font-size: 1.25rem;
+	}
 }
