@@ -200,7 +200,7 @@ const TimeGuest = ({ setTimeGuest, timeGuest }: TimeGuestProps) => {
 			</div>
 
 			<div className={styles.guest}>
-				<h4>How many people?</h4>
+				<h4>HOW MANY PEOPLE?</h4>
 				<div className={styles.list}>{peopleCount()}</div>
 				{timeGuest.guestError && (
 					<p className="error">{timeGuest.guestError}</p>
