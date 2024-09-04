@@ -10,18 +10,18 @@ type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 const timeSlots = [
-	{ value: 12, display: "12.00" },
-	{ value: 12, display: "12.30" },
-	{ value: 13, display: "1.00" },
-	{ value: 13, display: "1.30" },
-	{ value: 16, display: "4.00" },
-	{ value: 16, display: "4.30" },
-	{ value: 17, display: "5.00" },
-	{ value: 17, display: "5.30" },
-	{ value: 20, display: "8.00" },
-	{ value: 20, display: "8.30" },
-	{ value: 21, display: "9.00" },
-	{ value: 21, display: "9.30" },
+	{ value: 12, display: "12.00 PM" },
+	{ value: 12, display: "12.30 PM" },
+	{ value: 13, display: "1.00 PM" },
+	{ value: 13, display: "1.30 PM" },
+	{ value: 16, display: "4.00 PM" },
+	{ value: 16, display: "4.30 PM" },
+	{ value: 17, display: "5.00 PM" },
+	{ value: 17, display: "5.30 PM" },
+	{ value: 20, display: "8.00 PM" },
+	{ value: 20, display: "8.30 PM" },
+	{ value: 21, display: "9.00 PM" },
+	{ value: 21, display: "9.30 PM" },
 ];
 
 interface TimeGuestType {
@@ -115,7 +115,7 @@ const Finalform = ({
 						<input
 							type="text"
 							inputMode="tel"
-							placeholder="Number"
+							placeholder="Phone number"
 							onChange={handleChange}
 							value={formInput.number}
 							name="number"
