@@ -1,5 +1,14 @@
 ---
 import styles from "./reserve.module.scss";
+import ReserveAction from "./Reserve";
 ---
 
-<div class={styles.reserve}></div>
+<div class={styles.reserve}>
+	<div class={`container ${styles.container}`}>
+		<div class={styles.image}>
+			<img src="/home/reserve.webp" alt="" />
+		</div>
+
+		<ReserveAction client:load />
+	</div>
+</div>

@@ -2,58 +2,71 @@
 @use "./abstracts/reset";
 @use "./abstracts/button-links";
 @use "./abstracts/fonts";
+@use "./abstracts/calendar";
 
 :root {
-    --white: #ffffff;
-    --black: #000000;
+	--white: #ffffff;
+	--black: #000000;
+	--grey: #444444;
+	--light-grey: #f4f4f4;
+	--grey-outline: #d2d8dd;
 
-    --text: var(--black);
+	--text: var(--black);
 
-    --gold: #d0ad67;
-    --light-gold: #fff1d3;
+	--gold: #d0ad67;
+	--light-gold: #fff1d3;
 
-    --max-width: 78rem;
-    --max-width-wide: 90rem;
+	--max-width: 78rem;
+	--max-width-wide: 90rem;
 
-    --accent: var(--gold);
-    --accent-hover: hsl(from var(--accent) h s calc(l + 5));
-    --accent-active: hsl(from var(--accent) h s calc(l - 10));
+	--accent: var(--gold);
+	--accent-hover: hsl(from var(--accent) h s calc(l + 5));
+	--accent-active: hsl(from var(--accent) h s calc(l - 10));
 
-    // error
-    --error: #dc0000;
-    --error-hover: hsl(from var(--error) h s calc(l + 10));
-    --error-active: hsl(from var(--error) h s calc(l - 10));
+	// error
+	--error: #dc0000;
+	--error-hover: hsl(from var(--error) h s calc(l + 10));
+	--error-active: hsl(from var(--error) h s calc(l - 10));
 
-    --linkedin: #0077b5;
-    --twitterx: #333333;
-    --facebook: #4867aa;
-    --whatsapp: #25d366;
-    --instagram: linear-gradient(
-        #6559ca,
-        #bc318f 30%,
-        #e33f5f 50%,
-        #f77638 70%,
-        #fec66d 100%
-    );
+	// clear
+	--clear: #e8e8e8;
+	--clear-active: var(--black);
+	--clear-hover: var(--black);
 
-    --overlay: hsla(0, 0%, 0%, 0.75);
+	--linkedin: #0077b5;
+	--twitterx: #333333;
+	--facebook: #4867aa;
+	--whatsapp: #25d366;
+	--instagram: linear-gradient(
+		#6559ca,
+		#bc318f 30%,
+		#e33f5f 50%,
+		#f77638 70%,
+		#fec66d 100%
+	);
+
+	--overlay: hsla(0, 0%, 0%, 0.75);
+
+	// calander
+	--calander-now: #ddffdd;
+	--calander-now-hover: hsl(from var(--calander-now) h s calc(l + 5));
 }
 
 body {
-    font-family: "Satoshi";
-    font-optical-sizing: auto;
+	font-family: "Satoshi";
+	font-optical-sizing: auto;
 
-    background-color: var(--white);
-    color: var(--text);
+	background-color: var(--white);
+	color: var(--text);
 }
 
 .clash-display {
-    font-family: "Clash Display";
+	font-family: "Clash Display";
 }
 
 .container {
-    width: min(90%, var(--max-width));
-    margin-inline: auto;
+	width: min(90%, var(--max-width));
+	margin-inline: auto;
 }
 
 // .container-wide {
@@ -70,11 +83,11 @@ body {
 // }
 
 h2 {
-    font-weight: 600;
+	font-weight: 600;
 
-    font-size: clamp(3rem, 4vi, 3.75rem);
+	font-size: clamp(3rem, 4vi, 3.75rem);
 }
 
 .text {
-    font-size: clamp(1rem, 1.75vi, 1.5rem);
+	font-size: clamp(1rem, 1.75vi, 1.5rem);
 }

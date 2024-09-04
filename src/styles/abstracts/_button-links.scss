@@ -47,19 +47,21 @@
 		}
 	}
 
-	// &[data-variant="clear"] {
-	// 	--_bg: var(--clear);
-	// 	--_c: var(--text-button);
+	&[data-variant="clear"] {
+		--_bg: var(--clear);
+		--_c: #949494;
 
-	// 	&:hover,
-	// 	&:focus-visible {
-	// 		--_bg: var(--clear-hover);
-	// 	}
+		&:hover,
+		&:focus-visible {
+			--_c: var(--white);
+			--_bg: var(--clear-hover);
+		}
 
-	// 	&:active {
-	// 		--_bg: var(--clear-active);
-	// 	}
-	// }
+		&:active {
+			--_c: var(--white);
+			--_bg: var(--clear-active);
+		}
+	}
 
 	&[data-load="true"] {
 		width: 4.65em;
