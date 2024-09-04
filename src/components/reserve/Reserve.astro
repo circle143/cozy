@@ -1,9 +1,15 @@
 ---
 import styles from "./reserve.module.scss";
 import ReserveAction from "./Reserve";
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
 ---
 
-<div class={styles.reserve}>
+<div class={styles.reserve} data-title={title}>
 	<div class={`container ${styles.container}`}>
 		<div class={styles.image}>
 			<img src="/home/reserve.webp" alt="" />

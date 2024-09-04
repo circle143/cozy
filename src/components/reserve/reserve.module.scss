@@ -1,9 +1,18 @@
 @use "/src/styles/abstracts" as ab;
 
 .reserve {
+	--_w: 35rem;
+
+	&[data-title="reservation"] {
+		--_w: 40rem;
+		margin-block-end: calc(-1 * clamp(3em, 5vi, 5em));
+	}
+
 	@include ab.reserve {
-		background-color: var(--light-gold);
-		padding-block-start: 2em;
+		&[data-title="home"] {
+			background-color: var(--light-gold);
+			padding-block-start: 2em;
+		}
 	}
 
 	.container {
@@ -49,7 +58,7 @@
 
 			.info {
 				background-color: var(--light-grey);
-				width: min(100%, 35em);
+				width: min(100%, var(--_w));
 
 				padding-inline: clamp(1.5em, 3vi, 2.5em);
 				padding-block: 1.5em;
