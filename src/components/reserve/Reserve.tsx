@@ -361,7 +361,7 @@ const Reserve = () => {
 								data-variant="primary"
 								disabled={submitting}
 							>
-								{submitting ? "Submitting..." : "Submit"}
+								{submitting ? "Submitting" : "Submit"}
 							</button>
 						</div>
 					</Finalform>
