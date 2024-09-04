@@ -56,6 +56,12 @@
 				display: grid;
 				gap: 1em;
 
+				margin-inline: auto;
+
+				@include ab.reserve {
+					margin-inline: 0;
+				}
+
 				.step {
 					.calendar {
 						> div {
@@ -65,7 +71,7 @@
 
 					.selectionContainer {
 						display: grid;
-						gap: 1em;
+						gap: 0.75em;
 
 						> div {
 							border: 1px solid var(--grey-outline);
@@ -74,8 +80,91 @@
 							display: grid;
 							gap: 0.5em;
 
+							background-color: var(--white);
+
 							h4 {
 								text-align: center;
+							}
+
+							.list {
+								display: grid;
+								grid-template-columns: repeat(4, 1fr);
+								gap: 0.25em;
+
+								button {
+									--_bg: var(--light-grey);
+
+									background-color: var(--_bg);
+									border: none;
+									padding-block: 0.5rem;
+									font-weight: 500;
+
+									transition: background-color 300ms;
+
+									&:hover,
+									&:focus-visible {
+										--_bg: var(--calander-now);
+									}
+
+									&[data-selected="true"] {
+										--_bg: var(--accent);
+									}
+
+									&:disabled {
+										--_bg: hsl(
+											from var(--light-grey) h s l / 0.5
+										);
+										opacity: 0.5;
+										font-weight: 400;
+										cursor: not-allowed;
+									}
+								}
+							}
+						}
+					}
+
+					.form {
+						form {
+							--_gap: 1rem;
+
+							display: grid;
+							gap: var(--_gap);
+
+							input,
+							textarea {
+								resize: none;
+								width: 100%;
+
+								font-size: 1.25rem;
+								font-weight: 500;
+								padding-block: 0.25em;
+								padding-inline: 0.5em;
+
+								// border-style: solid;
+								// border-width: 1px;
+
+								// &:user-invalid {
+								// 	border-color: var(--error);
+								// }
+							}
+
+							.inputGroup {
+								display: grid;
+								gap: var(--_gap);
+
+								grid-template-columns: repeat(
+									auto-fit,
+									minmax(10rem, 1fr)
+								);
+
+								align-items: start;
+							}
+
+							.input {
+								display: grid;
+								gap: 0.25rem;
+
+								position: relative;
 							}
 						}
 					}

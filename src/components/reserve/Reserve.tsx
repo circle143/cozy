@@ -1,6 +1,9 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import Calendar from "react-calendar";
 import styles from "./reserve.module.scss";
+import { validateEmail, validateName, validateNumber } from "./validation";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type ValuePiece = Date | null;
 
@@ -24,6 +27,8 @@ const timeSlots = [
 interface TimeGuestType {
 	time: string;
 	guest: number;
+	timeError: string;
+	guestError: string;
 }
 
 interface TimeGuestProps {
@@ -44,9 +49,18 @@ interface FormInput {
 interface FinalformProps {
 	formInput: FormInput;
 	setFormInput: React.Dispatch<React.SetStateAction<FormInput>>;
+	children: JSX.Element;
+	handleSubmit: () => void;
+	submitting: boolean;
 }
 
-const Finalform = ({ formInput, setFormInput }: FinalformProps) => {
+const Finalform = ({
+	formInput,
+	setFormInput,
+	children,
+	handleSubmit,
+	submitting,
+}: FinalformProps) => {
 	const handleChange = (
 		e:
 			| React.ChangeEvent<HTMLTextAreaElement>
@@ -60,7 +74,12 @@ const Finalform = ({ formInput, setFormInput }: FinalformProps) => {
 
 	return (
 		<div className={styles.form}>
-			<form>
+			<form
+				onSubmit={(e) => {
+					e.preventDefault();
+					handleSubmit();
+				}}
+			>
 				<div className={styles.input}>
 					<input
 						type="text"
@@ -68,6 +87,8 @@ const Finalform = ({ formInput, setFormInput }: FinalformProps) => {
 						onChange={handleChange}
 						value={formInput.name}
 						name="name"
+						required
+						disabled={submitting}
 					/>
 
 					{formInput.nameError && (
@@ -83,6 +104,8 @@ const Finalform = ({ formInput, setFormInput }: FinalformProps) => {
 							onChange={handleChange}
 							value={formInput.email}
 							name="email"
+							required
+							disabled={submitting}
 						/>
 						{formInput.emailError && (
 							<p className="error">{formInput.emailError}</p>
@@ -96,6 +119,8 @@ const Finalform = ({ formInput, setFormInput }: FinalformProps) => {
 							onChange={handleChange}
 							value={formInput.number}
 							name="number"
+							required
+							disabled={submitting}
 						/>
 						{formInput.numberError && (
 							<p className="error">{formInput.numberError}</p>
@@ -109,8 +134,11 @@ const Finalform = ({ formInput, setFormInput }: FinalformProps) => {
 						onChange={handleChange}
 						value={formInput.info}
 						name="info"
+						disabled={submitting}
 					></textarea>
 				</div>
+
+				{children}
 			</form>
 		</div>
 	);
@@ -119,7 +147,7 @@ const Finalform = ({ formInput, setFormInput }: FinalformProps) => {
 const TimeGuest = ({ setTimeGuest, timeGuest }: TimeGuestProps) => {
 	const now = new Date();
 
-	const peopleCount = useMemo(() => {
+	const peopleCount = () => {
 		let elements: React.JSX.Element[] = [];
 
 		for (let i = 1; i <= 8; i++) {
@@ -127,19 +155,20 @@ const TimeGuest = ({ setTimeGuest, timeGuest }: TimeGuestProps) => {
 				<button
 					data-selected={timeGuest.guest == i}
 					key={i}
-					onClick={() =>
+					onClick={() => {
 						setTimeGuest((prev) => ({
 							...prev,
 							guest: i,
-						}))
-					}
+							guestError: "",
+						}));
+					}}
 				>
 					{i}
 				</button>
 			);
 		}
 		return elements;
-	}, []);
+	};
 
 	return (
 		<div className={styles.selectionContainer}>
@@ -156,6 +185,7 @@ const TimeGuest = ({ setTimeGuest, timeGuest }: TimeGuestProps) => {
 									setTimeGuest((prev) => ({
 										...prev,
 										time: item.display,
+										timeError: "",
 									}))
 								}
 							>
@@ -164,11 +194,17 @@ const TimeGuest = ({ setTimeGuest, timeGuest }: TimeGuestProps) => {
 						);
 					})}
 				</div>
+				{timeGuest.timeError && (
+					<p className="error">{timeGuest.timeError}</p>
+				)}
 			</div>
 
 			<div className={styles.guest}>
 				<h4>How many people?</h4>
-				<div className={styles.list}>{peopleCount}</div>
+				<div className={styles.list}>{peopleCount()}</div>
+				{timeGuest.guestError && (
+					<p className="error">{timeGuest.guestError}</p>
+				)}
 			</div>
 		</div>
 	);
@@ -181,6 +217,8 @@ const Reserve = () => {
 	const [timeGuest, setTimeGuest] = useState<TimeGuestType>({
 		time: "",
 		guest: 0,
+		timeError: "",
+		guestError: "",
 	});
 
 	const [formInput, setFormInput] = useState<FormInput>({
@@ -193,12 +231,14 @@ const Reserve = () => {
 		numberError: "",
 	});
 
+	const [submitting, setSubmitting] = useState(false);
+
 	// Get the current date
 	const currentDate = new Date();
 
 	// Add 21 days to the current date
 	const futureDate = new Date(
-		currentDate.getTime() + 210 * 24 * 60 * 60 * 1000
+		currentDate.getTime() + 21 * 24 * 60 * 60 * 1000
 	);
 
 	const getInfo = (step: number) => {
@@ -212,8 +252,66 @@ const Reserve = () => {
 		}
 	};
 
+	const validateForm = () => {
+		if (!validateName(formInput.name)) {
+			setFormInput((prev) => {
+				return { ...prev, nameError: "Invalid name provided." };
+			});
+			return false;
+		}
+
+		if (!validateEmail(formInput.email)) {
+			setFormInput((prev) => {
+				return { ...prev, emailError: "Invalid email provided." };
+			});
+			return false;
+		}
+
+		if (!validateNumber(formInput.number)) {
+			setFormInput((prev) => {
+				return { ...prev, numberError: "Invalid number" };
+			});
+			return false;
+		}
+
+		setFormInput((prev) => {
+			return { ...prev, nameError: "", emailError: "", numberError: "" };
+		});
+		return true;
+	};
+
 	const handleSubmit = () => {
 		// validate final form here
+		if (!validateForm()) {
+			return;
+		}
+		setSubmitting(true);
+
+		// handle api req
+		setTimeout(() => {
+			setSubmitting(false);
+			setFormInput({
+				name: "",
+				email: "",
+				number: "",
+				info: "",
+				nameError: "",
+				emailError: "",
+				numberError: "",
+			});
+			setTimeGuest({
+				time: "",
+				guest: 0,
+				timeError: "",
+				guestError: "",
+			});
+			onChange(new Date());
+			setStep(1);
+
+			toast.success(
+				"Successfully submitted your details " + formInput.name
+			);
+		}, 2000);
 	};
 
 	const getItem = (step: number) => {
@@ -241,9 +339,66 @@ const Reserve = () => {
 					<Finalform
 						setFormInput={setFormInput}
 						formInput={formInput}
-					/>
+						handleSubmit={handleSubmit}
+						submitting={submitting}
+					>
+						<div className={styles.infoAction}>
+							{step !== 1 && step <= 3 && !submitting && (
+								<button
+									data-type="button"
+									data-variant="clear"
+									onClick={() => {
+										if (step != 1)
+											setStep((prev) => prev - 1);
+									}}
+									disabled={submitting}
+								>
+									Prev
+								</button>
+							)}
+							<button
+								data-type="button"
+								data-variant="primary"
+								disabled={submitting}
+							>
+								{submitting ? "Submitting..." : "Submit"}
+							</button>
+						</div>
+					</Finalform>
 				);
 		}
+	};
+
+	const validateTimeAndGuest = () => {
+		if (timeGuest.time.length === 0) {
+			setTimeGuest((prev) => {
+				return {
+					...prev,
+					timeError: "You need to select time to proceed.",
+				};
+			});
+			return false;
+		}
+
+		if (timeGuest.guest <= 0) {
+			setTimeGuest((prev) => {
+				return {
+					...prev,
+					guestError: "You need to select guest to proceed.",
+				};
+			});
+			return false;
+		}
+
+		setTimeGuest((prev) => {
+			return {
+				...prev,
+				guestError: "",
+				timeError: "",
+			};
+		});
+
+		return true;
 	};
 
 	const handleStep = () => {
@@ -254,11 +409,12 @@ const Reserve = () => {
 
 		if (step == 2) {
 			// validate time and guest
+			if (!validateTimeAndGuest()) {
+				return;
+			}
 			setStep(3);
 			return;
 		}
-
-		handleSubmit();
 	};
 
 	return (
@@ -284,27 +440,31 @@ const Reserve = () => {
 
 				<div className={styles.step}>{getItem(step)}</div>
 
-				<div className={styles.infoAction}>
-					{step !== 1 && step <= 3 && (
+				{step != 3 && (
+					<div className={styles.infoAction}>
+						{step !== 1 && step <= 3 && (
+							<button
+								data-type="button"
+								data-variant="clear"
+								onClick={() => {
+									if (step != 1) setStep((prev) => prev - 1);
+								}}
+							>
+								Prev
+							</button>
+						)}
 						<button
 							data-type="button"
-							data-variant="clear"
-							onClick={() => {
-								if (step != 1) setStep((prev) => prev - 1);
-							}}
+							data-variant="primary"
+							onClick={handleStep}
 						>
-							Prev
+							{step == 3 ? "Submit" : "Next"}
 						</button>
-					)}
-					<button
-						data-type="button"
-						data-variant="primary"
-						onClick={handleStep}
-					>
-						{step == 3 ? "Submit" : "Next"}
-					</button>
-				</div>
+					</div>
+				)}
 			</div>
+
+			<ToastContainer />
 		</div>
 	);
 };

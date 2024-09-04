@@ -10,6 +10,7 @@
 	--grey: #444444;
 	--light-grey: #f4f4f4;
 	--grey-outline: #d2d8dd;
+	--disabled: #7d7c7c;
 
 	--text: var(--black);
 
@@ -50,6 +51,9 @@
 	// calander
 	--calander-now: #ddffdd;
 	--calander-now-hover: hsl(from var(--calander-now) h s calc(l + 5));
+
+	accent-color: var(--accent);
+	caret-color: var(--accent);
 }
 
 body {
@@ -90,4 +94,9 @@ h2 {
 
 .text {
 	font-size: clamp(1rem, 1.75vi, 1.5rem);
+}
+
+.error {
+	font-size: 1rem;
+	color: var(--error);
 }
