@@ -6,12 +6,33 @@ interface Props {
 }
 
 const { images } = Astro.props;
+
+const len = images.length;
+let imgArr: string[][] = [];
+const GROUP_SIZE = 3;
+
+for (let i = 0; i < len; i++) {
+	let tempArr: string[] = [];
+	const LIMIT = i + GROUP_SIZE;
+
+	for (i; i < len && i < LIMIT; i++) {
+		tempArr.push(images[i]);
+	}
+
+	imgArr.push(tempArr);
+}
 ---
 
 <div class={`container ${styles.gallery}`}>
 	{
-		images.map((img) => {
-			return <img src={img} />;
+		imgArr.map((images) => {
+			return (
+				<div class={styles.images}>
+					{images.map((element) => (
+						<img src={element} />
+					))}
+				</div>
+			);
 		})
 	}
 </div>

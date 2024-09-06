@@ -1,10 +1,46 @@
 @use "/src/styles/abstracts" as ab;
 
 .gallery {
+	--_gap: clamp(1rem, 2vi, 2rem);
+
 	display: grid;
-	gap: 1em;
+	gap: var(--_gap);
 
 	img {
 		border-radius: 0.5em;
+		height: 100%;
+		width: 100%;
+
+		object-fit: cover;
+
+		transition: scale 250ms;
+
+		&:hover {
+			scale: 1.05;
+		}
+	}
+
+	.images {
+		display: grid;
+		gap: var(--_gap);
+
+		@include ab.screen-48 {
+			--_col: 2fr 3fr;
+
+			grid-template-rows: 1fr 1fr;
+			grid-template-columns: var(--_col);
+
+			&:nth-child(odd) > :nth-child(2) {
+				grid-row: span 2;
+			}
+
+			&:nth-child(even) {
+				--_col: 3fr 2fr;
+
+				> :nth-child(1) {
+					grid-row: span 2;
+				}
+			}
+		}
 	}
 }
