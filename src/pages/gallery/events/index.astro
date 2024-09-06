@@ -1,5 +1,6 @@
 ---
 import Categories from "@components/categories/Categories.astro";
+import Gallery from "@components/gallery/Gallery.astro";
 import Hero from "@components/hero/Hero.astro";
 import Layout from "@layouts/Layout.astro";
 
@@ -21,4 +22,6 @@ const images = [
 	<Hero title="Gallery" />
 
 	<Categories page="events" />
+
+	<Gallery images={images} />
 </Layout>

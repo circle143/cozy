@@ -1,0 +1,17 @@
+---
+import styles from "./gallery.module.scss";
+
+interface Props {
+	images: string[];
+}
+
+const { images } = Astro.props;
+---
+
+<div class={`container ${styles.gallery}`}>
+	{
+		images.map((img) => {
+			return <img src={img} />;
+		})
+	}
+</div>

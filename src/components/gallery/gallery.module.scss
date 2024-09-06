@@ -1,0 +1,10 @@
+@use "/src/styles/abstracts" as ab;
+
+.gallery {
+	display: grid;
+	gap: 1em;
+
+	img {
+		border-radius: 0.5em;
+	}
+}
