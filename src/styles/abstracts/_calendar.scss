@@ -53,8 +53,10 @@
 	// my code
 	font-weight: 600;
 	font-size: 1.25rem;
+	padding: 1px;
 
 	position: relative;
+
 	&::before {
 		position: absolute;
 		content: "";

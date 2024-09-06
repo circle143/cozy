@@ -424,8 +424,8 @@ const Reserve = () => {
 
 				<p>
 					or Call us at{" "}
-					<a data-type="link" href="tel:8826284330">
-						8826284330
+					<a data-type="link" href="tel:9266158606">
+                    +91 9266158606
 					</a>
 				</p>
 			</div>

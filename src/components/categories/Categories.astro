@@ -1,0 +1,47 @@
+---
+interface props {
+	page: string;
+}
+
+const { page } = Astro.props;
+import styles from "./categories.module.scss";
+
+const pages = [
+	{
+		display: "All",
+		link: "/gallery",
+	},
+	{
+		display: "Ambiance",
+		link: "/gallery/ambiance",
+	},
+	{
+		display: "Food",
+		link: "/gallery/food",
+	},
+	{
+		display: "Events",
+		link: "/gallery/events",
+	},
+	{
+		display: "Kitchen",
+		link: "/gallery/kitchen",
+	},
+];
+---
+
+<div class={`container ${styles.categories}`}>
+	{
+		pages.map((item) => {
+			return (
+				<a
+					data-type="link"
+					href={item.link}
+					data-active={item.display.toLowerCase() === page}
+				>
+					{item.display}
+				</a>
+			);
+		})
+	}
+</div>

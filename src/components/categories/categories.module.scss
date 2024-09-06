@@ -1,0 +1,23 @@
+@use "/src/styles/abstracts" as ab;
+
+.categories {
+	display: flex;
+	row-gap: 2rem;
+	column-gap: 3rem;
+	justify-content: center;
+	flex-wrap: wrap;
+
+	@include ab.screen-40 {
+		justify-content: space-between;
+	}
+
+	a {
+		font-size: 1.5rem;
+		font-weight: 500;
+		text-underline-offset: 10px;
+
+		&[data-active] {
+			text-decoration: underline var(--accent);
+		}
+	}
+}
