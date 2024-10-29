@@ -9,9 +9,5 @@ document.addEventListener("astro:page-load", () => {
 		emblaNode.querySelector("#embla__viewport")
 	);
 
-	const emblaApi = EmblaCarousel(viewportNode, OPTIONS, [
-		Autoplay({
-			delay: 3000,
-		}),
-	]);
+	const emblaApi = EmblaCarousel(viewportNode, OPTIONS, [Autoplay()]);
 });
