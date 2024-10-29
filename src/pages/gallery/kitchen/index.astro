@@ -2,20 +2,8 @@
 import Categories from "@components/categories/Categories.astro";
 import Gallery from "@components/gallery/Gallery.astro";
 import Hero from "@components/hero/Hero.astro";
+import { kitcherImages } from "@data/gallery";
 import Layout from "@layouts/Layout.astro";
-
-const images = [
-	"/gallery/gallery.webp",
-	"/gallery/gallery.webp",
-	"/gallery/gallery.webp",
-	"/gallery/gallery.webp",
-	"/gallery/gallery.webp",
-	"/gallery/gallery.webp",
-	"/gallery/gallery.webp",
-	"/gallery/gallery.webp",
-	"/gallery/gallery.webp",
-	"/gallery/gallery.webp",
-];
 ---
 
 <Layout title="Cozy Lounge - Gallery">
@@ -23,5 +11,5 @@ const images = [
 
 	<Categories page="kitchen" />
 
-	<Gallery images={images} />
+	<Gallery images={kitcherImages} />
 </Layout>
