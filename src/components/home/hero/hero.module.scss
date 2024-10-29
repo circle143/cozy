@@ -1,6 +1,9 @@
 @use "/src/styles/abstracts" as ab;
 
 .hero {
+	--_w: min(var(--max-width), calc(90 * var(--vw)));
+	--_mi: calc((100 * var(--vw) - var(--_w)) / 2);
+
 	display: grid;
 	gap: 2px;
 	position: relative;
@@ -39,27 +42,18 @@
 		display: none;
 
 		position: absolute;
-		width: min(90%, var(--max-width));
-		left: 50%;
-		translate: -50%;
 
 		grid-column: cozy-start;
 		gap: 2rem;
 		align-items: center;
 		justify-content: space-between;
 
-		@include ab.nav {
-			display: none;
-		}
-
 		@include ab.hero {
-			--_w: min(var(--max-width), calc(90 * var(--vw)));
-			--_mi: calc((100 * var(--vw) - var(--_w)) / 2);
-
 			left: var(--_mi);
 			translate: 0;
 
 			width: calc(100% - var(--_mi));
+
 			display: flex;
 		}
 
@@ -121,7 +115,7 @@
 			margin-inline: auto;
 
 			@include ab.screen-40 {
-				width: 70%;
+				width: auto;
 			}
 		}
 	}
@@ -140,9 +134,6 @@
 			text-align: left;
 
 			.content {
-				--_w: min(var(--max-width), calc(90 * var(--vw)));
-				--_mi: calc((100 * var(--vw) - var(--_w)) / 2);
-
 				margin-inline-start: var(--_mi);
 
 				width: 100%;

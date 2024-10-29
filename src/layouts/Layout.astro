@@ -34,10 +34,12 @@ const { title } = Astro.props;
 			<Footer />
 		</div>
 	</body><script>
-		new ResizeObserver(() => {
-			let vw = document.documentElement.clientWidth / 100;
-			document.documentElement.style.setProperty("--vw", `${vw}px`);
-		}).observe(document.documentElement);
+		document.addEventListener("astro:page-load", () => {
+			new ResizeObserver(() => {
+				let vw = document.documentElement.clientWidth / 100;
+				document.documentElement.style.setProperty("--vw", `${vw}px`);
+			}).observe(document.documentElement);
+		});
 	</script>
 	<style>
 		div {
