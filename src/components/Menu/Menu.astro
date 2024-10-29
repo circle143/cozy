@@ -1,84 +1,14 @@
 ---
 import styles from "./menu.module.scss";
 import Dish from "../home/Dish/Dish.astro";
-
-const dish = [
-	{
-		dish_name: "Crème Cappucino (Mushroom, Broccoli, Chicken)",
-		dish_img: "/home/dish.png",
-		dish_price: "₹275/325",
-		dish_content:
-			"Melted Butter with Chef made Stock and Finishing with Butter.",
-	},
-	{
-		dish_name: "Sup Mang Tay Cua",
-		dish_img: "/home/dish.png",
-		dish_price: "₹375",
-		dish_content:
-			"Delicious Thai Tom Yum Soup is a spicy and sour soup made with mix vegetables.",
-	},
-	{
-		dish_name: "Tom Yum Kung",
-		dish_img: "/home/dish.png",
-		dish_price: "₹375",
-		dish_content:
-			"Crispy romaine lettuce, crunchy croutons, parmesan get tossed with a creamy Caesar Salad dressing.",
-	},
-	{
-		dish_name: "Mexican Caesar - Veg/Chicken",
-		dish_img: "/home/dish.png",
-		dish_price: "₹325/345",
-		dish_content:
-			"Salad has everything you are looking for in a summer salad – sweetness from the fruit, creaminess from the Cheese.",
-	},
-	{
-		dish_name: "Miso Tuna Salad",
-		dish_img: "/home/dish.png",
-		dish_price: "₹445",
-		dish_content:
-			"Stuffed with vegetables & Chicken flavored with soya sauce and fried to make an appetising starter.",
-	},
-	{
-		dish_name: "Potato Factory - Plain/Peri Peri / Fully Loaded / Truffle",
-		dish_img: "/home/dish.png",
-		dish_price: "₹245/275/325/375",
-		dish_content:
-			"Nagaland in the North East usually means spicy, it has enough complex heat from a blend of Homemade Sauce & The Ghost Chilli.",
-	},
-	{
-		dish_name: "Burrata Caprese Salad",
-		dish_img: "/home/dish.png",
-		dish_price: "₹395",
-		dish_content: "BAR BITES",
-	},
-	{
-		dish_name: "Stuffed Chicken Wings",
-		dish_img: "/home/dish.png",
-		dish_price: "₹450",
-		dish_content:
-			"Chicken wings stuffed with minced meat and grilled to perfection.",
-	},
-	{
-		dish_name: "Grilled Prawns",
-		dish_img: "/home/dish.png",
-		dish_price: "₹695",
-		dish_content: "Prawns marinated with spices and grilled till tender.",
-	},
-	{
-		dish_name: "Garlic Bread with Cheese",
-		dish_img: "/home/dish.png",
-		dish_price: "₹195",
-		dish_content:
-			"Garlic bread topped with mozzarella cheese and baked until golden.",
-	},
-];
+import { dish } from "@data/menu";
 
 const title1 = "Food Menu";
 const title2 = "Drinks Menu";
 
 const button1 = {
 	name: "Download Our Food Menu",
-	file: "",
+	file: "/food-menu.pdf",
 };
 
 const button2 = {
@@ -91,7 +21,7 @@ const button2 = {
 	<div class="container">
 		<Dish button1={button1} title1={title1} data={dish} />
 	</div>
-	<div class="container">
+	<!-- <div class="container">
 		<Dish button1={button2} title1={title2} data={dish} />
-	</div>
+	</div> -->
 </div>
