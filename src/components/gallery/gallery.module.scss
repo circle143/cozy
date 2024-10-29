@@ -24,6 +24,8 @@
 		display: grid;
 		gap: var(--_gap);
 
+		max-height: 32rem;
+
 		@include ab.screen-48 {
 			--_col: 2fr 3fr;
 
