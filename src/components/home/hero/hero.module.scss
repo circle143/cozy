@@ -92,12 +92,12 @@
 		overflow: hidden;
 
 		&:hover {
-			img {
+			.image {
 				scale: 1.1;
 			}
 		}
 
-		img {
+		.image {
 			position: absolute;
 			object-fit: cover;
 			z-index: -1;
@@ -107,9 +107,16 @@
 			height: 100%;
 
 			transition: scale 200ms;
+
+			img {
+				object-fit: cover;
+				width: 100%;
+				height: 100%;
+				transition: scale 200ms;
+			}
 		}
 
-		> div {
+		.content {
 			width: 90%;
 			margin-inline: auto;
 
@@ -121,6 +128,7 @@
 
 	.cozy {
 		grid-area: cozy;
+		overflow: hidden;
 
 		text-align: center;
 		text-wrap: balance;
@@ -131,7 +139,7 @@
 		@include ab.hero {
 			text-align: left;
 
-			> div {
+			.content {
 				--_w: min(var(--max-width), calc(90 * var(--vw)));
 				--_mi: calc((100 * var(--vw) - var(--_w)) / 2);
 
@@ -142,7 +150,7 @@
 			}
 		}
 
-		> div {
+		.content {
 			display: grid;
 			gap: 1rem;
 		}
@@ -154,6 +162,25 @@
 
 		.heading {
 			font-size: clamp(3rem, 4vi, 3.75rem);
+		}
+
+		.image {
+			margin: auto;
+			--slide-size: 100%;
+
+			.embla__viewport {
+				overflow: hidden;
+			}
+			.embla__container {
+				display: flex;
+				touch-action: pan-y pinch-zoom;
+				margin-left: calc(var(--slide-spacing) * -1);
+			}
+			.embla__slide {
+				transform: translate3d(0, 0, 0);
+				flex: 0 0 var(--slide-size);
+				min-width: 0;
+			}
 		}
 	}
 

@@ -45,8 +45,23 @@ const links = [
 	</nav>
 
 	<div class={styles.cozy}>
-		<img src="/home/hero-4.webp" alt="" />
-		<div>
+		<div id="embla" class={styles.image}>
+			<div class={styles.embla__viewport} id="embla__viewport">
+				<div class={styles.embla__container}>
+					<div class={styles.embla__slide}>
+						<img src="/home/hero/one.webp" alt="" />
+					</div>
+					<div class={styles.embla__slide}>
+						<img src="/home/hero/two.webp" alt="" />
+					</div>
+					<div class={styles.embla__slide}>
+						<img src="/home/hero/three.webp" alt="" />
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class={styles.content}>
 			<p class={`clash-display ${styles.subheading}`}>
 				Cozy- The Casual Lounge
 			</p>
@@ -66,9 +81,9 @@ const links = [
 	</div>
 
 	<div class={styles.menu}>
-		<img src="/home/hero-2.webp" alt="" />
+		<img class={styles.image} src="/home/hero-2.webp" alt="" />
 
-		<div>
+		<div class={styles.content}>
 			<h4 class="clash-display">
 				<a data-type="link" href="/menu">Our Menu</a>
 			</h4>
@@ -77,9 +92,9 @@ const links = [
 	</div>
 
 	<div class={styles.delivery}>
-		<img src="/home/hero-3.webp" alt="" />
+		<img class={styles.image} src="/home/hero-3.webp" alt="" />
 
-		<div>
+		<div class={styles.content}>
 			<h4 class="clash-display">
 				<a
 					href="https://www.zomato.com/ncr/cozy-the-casual-lounge-sector-75-noida?amp=1"
@@ -92,9 +107,9 @@ const links = [
 	</div>
 
 	<div class={styles.inside}>
-		<img src="/home/hero-4.webp" alt="" />
+		<img class={styles.image} src="/home/hero-4.webp" alt="" />
 
-		<div>
+		<div class={styles.content}>
 			<h4 class="clash-display">
 				<a href="/gallery" data-type="link">Inside Cozy Lounge</a>
 			</h4>
@@ -102,3 +117,7 @@ const links = [
 		</div>
 	</div>
 </div>
+
+<section class="embla"></section>
+
+<script src="../../../scripts/carousel.ts"></script>
