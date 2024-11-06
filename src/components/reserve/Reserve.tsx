@@ -287,31 +287,49 @@ const Reserve = () => {
 		}
 		setSubmitting(true);
 
-		// handle api req
-		setTimeout(() => {
-			setSubmitting(false);
-			setFormInput({
-				name: "",
-				email: "",
-				number: "",
-				info: "",
-				nameError: "",
-				emailError: "",
-				numberError: "",
-			});
-			setTimeGuest({
-				time: "",
-				guest: 0,
-				timeError: "",
-				guestError: "",
-			});
-			onChange(new Date());
-			setStep(1);
+		let body = JSON.stringify({
+			name: formInput.name,
+			date: (day as Date).toDateString(),
+			time: timeGuest.time,
+			guests: timeGuest.guest.toString(),
+			email: formInput.email,
+			phone: formInput.number,
+			message: formInput.info,
+		});
+		let url = "https://api-wo48.onrender.com/reservation";
 
-			toast.success(
-				"Successfully submitted your details " + formInput.name
-			);
-		}, 2000);
+		fetch(url, {
+			method: "POST",
+			body,
+		})
+			.then((res) => res.json())
+			.then((res) => {
+				if (res.error) throw new Error(res.message);
+				toast.success(
+					"Successfully submitted your details " + formInput.name
+				);
+				setFormInput({
+					name: "",
+					email: "",
+					number: "",
+					info: "",
+					nameError: "",
+					emailError: "",
+					numberError: "",
+				});
+				setTimeGuest({
+					time: "",
+					guest: 0,
+					timeError: "",
+					guestError: "",
+				});
+				onChange(new Date());
+				setStep(1);
+			})
+			.catch((err) => {
+				toast.error(err.message);
+			})
+			.finally(() => setSubmitting(false));
 	};
 
 	const getItem = (step: number) => {
@@ -425,7 +443,7 @@ const Reserve = () => {
 				<p>
 					or Call us at{" "}
 					<a data-type="link" href="tel:9266158606">
-                    +91 9266158606
+						+91 9266158606
 					</a>
 				</p>
 			</div>
