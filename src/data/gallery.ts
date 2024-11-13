@@ -10,18 +10,7 @@ export const foodImages = [
 	"/gallery/food/IMG_6951.webp",
 ];
 
-export const eventsImages = [
-	"/gallery/gallery.webp",
-	"/gallery/gallery.webp",
-	"/gallery/gallery.webp",
-	"/gallery/gallery.webp",
-	"/gallery/gallery.webp",
-	"/gallery/gallery.webp",
-	"/gallery/gallery.webp",
-	"/gallery/gallery.webp",
-	"/gallery/gallery.webp",
-	"/gallery/gallery.webp",
-];
+export const eventsImages = [];
 
 export const ambianceImages = [
 	"/gallery/ambiance/IMG_7032.webp",
@@ -44,18 +33,7 @@ export const ambianceImages = [
 	"/gallery/ambiance/IMG_7005.webp",
 ];
 
-export const kitcherImages = [
-	"/gallery/gallery.webp",
-	"/gallery/gallery.webp",
-	"/gallery/gallery.webp",
-	"/gallery/gallery.webp",
-	"/gallery/gallery.webp",
-	"/gallery/gallery.webp",
-	"/gallery/gallery.webp",
-	"/gallery/gallery.webp",
-	"/gallery/gallery.webp",
-	"/gallery/gallery.webp",
-];
+export const kitcherImages = [];
 
 export const images = [
 	...ambianceImages,
