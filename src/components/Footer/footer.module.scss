@@ -8,15 +8,13 @@
 	}
 	&_1 {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(250px, 4fr));
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 		gap: 2em;
 
 		padding-block: clamp(2em, 4vi, 4em);
 		border-bottom: 0.1em solid var(--white);
 
 		.item {
-			width: clamp(11em, 13vi, 13em);
-
 			display: flex;
 			flex-direction: column;
 			gap: 0.8em;
@@ -27,6 +25,14 @@
 
 				&:hover {
 					text-decoration: underline;
+				}
+			}
+
+			> div {
+				iframe {
+					outline: 2px solid red;
+					width: 100%;
+					height: auto;
 				}
 			}
 		}
