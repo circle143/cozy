@@ -1,13 +1,13 @@
 export const foodImages = [
-	"/gallery/food/IMG_6713.jpg",
-	"/gallery/food/IMG_6752.jpg",
-	"/gallery/food/IMG_6819.jpg",
-	"/gallery/food/IMG_6830.jpg",
-	"/gallery/food/IMG_6841.jpg",
-	"/gallery/food/IMG_6866.jpg",
-	"/gallery/food/IMG_6926.jpg",
-	"/gallery/food/IMG_6934.jpg",
-	"/gallery/food/IMG_6951.jpg",
+	"/gallery/food/IMG_67131.jpg",
+	"/gallery/food/IMG_67521.jpg",
+	"/gallery/food/IMG_68191.jpg",
+	"/gallery/food/IMG_68301.jpg",
+	"/gallery/food/IMG_68411.jpg",
+	"/gallery/food/IMG_68661.jpg",
+	"/gallery/food/IMG_69261.jpg",
+	"/gallery/food/IMG_69341.jpg",
+	"/gallery/food/IMG_69511.jpg",
 ];
 
 export const eventsImages = [];
