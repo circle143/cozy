@@ -4,6 +4,7 @@ import styles from "./reserve.module.scss";
 import { validateEmail, validateName, validateNumber } from "./validation";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { parsePhoneNumberWithError } from "libphonenumber-js";
 
 type ValuePiece = Date | null;
 
@@ -280,26 +281,50 @@ const Reserve = () => {
 		return true;
 	};
 
+	function toE164(phone: string) {
+		try {
+			const phoneNumber = parsePhoneNumberWithError(phone, "IN");
+			if (!phoneNumber.isValid()) {
+				throw new Error("Invalid phone number");
+			}
+			return phoneNumber.number; // Returns in E.164 format
+		} catch (err) {
+			setFormInput((prev) => {
+				return { ...prev, numberError: "Invalid number" };
+			});
+			console.error("Error:", err);
+			return null;
+		}
+	}
+
 	const handleSubmit = () => {
 		// validate final form here
 		if (!validateForm()) {
 			return;
 		}
-		setSubmitting(true);
 
+		let phone = toE164(formInput.number);
+		if (!phone) {
+			return;
+		}
+
+		setSubmitting(true);
 		let body = JSON.stringify({
 			name: formInput.name,
 			date: (day as Date).toDateString(),
 			time: timeGuest.time,
-			guests: timeGuest.guest.toString(),
+			guests: timeGuest.guest,
 			email: formInput.email,
-			phone: formInput.number,
+			phone: phone,
 			message: formInput.info,
 		});
 		let url = "https://api-wo48.onrender.com/cozy/reservation";
 
 		fetch(url, {
 			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
 			body,
 		})
 			.then((res) => res.json())
