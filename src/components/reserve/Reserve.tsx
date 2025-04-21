@@ -296,7 +296,7 @@ const Reserve = () => {
 			phone: formInput.number,
 			message: formInput.info,
 		});
-		let url = "https://api-wo48.onrender.com/reservation";
+		let url = "https://api-wo48.onrender.com/cozy/reservation";
 
 		fetch(url, {
 			method: "POST",
