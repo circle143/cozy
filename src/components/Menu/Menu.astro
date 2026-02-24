@@ -2,18 +2,19 @@
 import styles from "./menu.module.scss";
 import Dish from "../home/Dish/Dish.astro";
 import { dish } from "@data/menu";
+import { drinks } from "@data/menu";
 
 const title1 = "Food Menu";
 const title2 = "Drinks Menu";
 
 const button1 = {
 	name: "Download Our Food Menu",
-	file: "/food-menu.pdf",
+	file: "/FoodMenu.pdf",
 };
 
 const button2 = {
 	name: "Download Our Bar Menu",
-	file: "",
+	file: "/CozyDrink.pdf",
 };
 ---
 
@@ -21,7 +22,8 @@ const button2 = {
 	<div class="container">
 		<Dish button1={button1} title1={title1} data={dish} />
 	</div>
-	<!-- <div class="container">
-		<Dish button1={button2} title1={title2} data={dish} />
-	</div> -->
+	<div class="container">
+		<Dish button1={button2} title1={title2} data={drinks} />
+		<p>Alcohol service is subject to valid license availability on operating days.</p>
+	</div>
 </div>

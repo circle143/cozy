@@ -2,37 +2,39 @@
 import styles from "./gallery.module.scss";
 
 interface Props {
-	images: string[];
+  images: string[];
 }
 
 const { images } = Astro.props;
 
-const len = images.length;
-let imgArr: string[][] = [];
+// Shuffle function
+function shuffleArray(arr: string[]) {
+  const shuffled = [...arr];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+const shuffledImages = shuffleArray(images);
+
 const GROUP_SIZE = 3;
+let imgArr: string[][] = [];
 
-for (let i = 0; i < len; i++) {
-	let tempArr: string[] = [];
-	const LIMIT = i + GROUP_SIZE;
-
-	for (i; i < len && i < LIMIT; i++) {
-		tempArr.push(images[i]);
-	}
-
-	imgArr.push(tempArr);
+for (let i = 0; i < shuffledImages.length; i += GROUP_SIZE) {
+  imgArr.push(shuffledImages.slice(i, i + GROUP_SIZE));
 }
 ---
 
 <div class={`container ${styles.gallery}`}>
-	{
-		imgArr.map((images) => {
-			return (
-				<div class={styles.images}>
-					{images.map((element) => (
-						<img src={element} />
-					))}
-				</div>
-			);
-		})
-	}
+  {
+    imgArr.map((group) => (
+      <div class={styles.images}>
+        {group.map((img) => (
+          <img src={img} loading="lazy" />
+        ))}
+      </div>
+    ))
+  }
 </div>

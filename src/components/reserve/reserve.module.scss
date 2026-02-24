@@ -17,8 +17,8 @@
 
 	.container {
 		display: grid;
-		gap: 1em;
-
+		// gap: 1em;
+// outline :2px solid red;
 		@include ab.reserve {
 			grid-template-columns: 2fr 3fr;
 		}
@@ -26,16 +26,19 @@
 		.image {
 			display: none;
 			align-self: end;
-
+			// outline :2px solid red;
+			
 			@include ab.reserve {
 				display: block;
+				width: 100%;
+
 			}
 		}
 
 		.action {
 			display: grid;
 			gap: 1em;
-
+			// outline :2px solid red;
 			align-content: start;
 			padding-block-end: 2em;
 

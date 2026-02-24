@@ -1,10 +1,17 @@
 @use "/src/styles/abstracts" as ab;
 
 .hero {
-	background-image: url("/hero.webp");
+	background-image:
+	linear-gradient(
+		to bottom,
+		rgba(0, 0, 0, 0.438),
+		rgba(0, 0, 0, 0.438),
+		rgba(0, 0, 0, 0.473)
+	),
+	url("/hero.jpeg");
 	background-repeat: no-repeat;
 	background-size: cover;
-	background-position: bottom;
+	background-position: center;
 
 	h1 {
 		text-align: center;
