@@ -18,9 +18,9 @@
 	.container {
 		display: grid;
 		// gap: 1em;
-// outline :2px solid red;
+        // outline :2px solid red;
 		@include ab.reserve {
-			grid-template-columns: 2fr 3fr;
+			grid-template-columns: 1fr 1fr;
 		}
 
 		.image {
@@ -31,7 +31,6 @@
 			@include ab.reserve {
 				display: block;
 				width: 100%;
-
 			}
 		}
 
