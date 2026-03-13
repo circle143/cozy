@@ -837,32 +837,58 @@ const Reserve = () => {
     // Using local API route
     let url = "/api/cozy-reservation";
 
-    fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    })
-      .then(async (res) => {
-        console.log("📥 Response status:", res.status);
+    const backendUrl =
+      "https://email-sender-174740019883.asia-south2.run.app/cozy/reservation";
 
-        const text = await res.text();
-        console.log("📥 Response text:", text);
+    const runSubmit = async (targetUrl: string) => {
+      const res = await fetch(targetUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
 
-        if (!text) {
-          return { success: true };
+      const text = await res.text();
+      const parsed = text
+        ? ((): any => {
+            try {
+              return JSON.parse(text);
+            } catch {
+              return { success: true, message: text };
+            }
+          })()
+        : { success: true };
+
+      return { status: res.status, ok: res.ok, body: parsed };
+    };
+
+    const attempt = async () => {
+      const first = await runSubmit(url);
+
+      if (!first.ok) {
+        console.warn("⚠️ Primary API route failed, trying direct backend", {
+          status: first.status,
+          body: first.body,
+        });
+
+        return await runSubmit(backendUrl);
+      }
+
+      return first;
+    };
+
+    attempt()
+      .then((result) => {
+        if (!result.ok || !result.body?.success) {
+          console.error("❌ Reservation failed", result);
+          toast.error(
+            result.body?.message ||
+              "❌ Something went wrong. Please try again.",
+          );
+          return;
         }
 
-        try {
-          return JSON.parse(text);
-        } catch (e) {
-          console.log("⚠️ Not JSON, treating as success");
-          return { success: true };
-        }
-      })
-      .then((res) => {
-        console.log("✅ Success:", res);
         toast.success("Thank you! Your reservation has been received.");
 
         // Reset form
@@ -887,25 +913,6 @@ const Reserve = () => {
       .catch((err) => {
         console.error("❌ Error:", err);
         toast.error("❌ Something went wrong. Please try again.");
-
-        // Reset form anyway
-        setFormInput({
-          name: "",
-          email: "",
-          number: "",
-          info: "",
-          nameError: "",
-          emailError: "",
-          numberError: "",
-        });
-        setTimeGuest({
-          time: "",
-          guest: 0,
-          timeError: "",
-          guestError: "",
-        });
-        onChange(new Date());
-        setStep(1);
       })
       .finally(() => setSubmitting(false));
   };
