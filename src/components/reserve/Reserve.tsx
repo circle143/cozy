@@ -834,8 +834,12 @@ const Reserve = () => {
 
     console.log("📦 Payload:", payload);
 
-    // Using local API route
-    let url = "/api/cozy-reservation";
+    const BACKEND_URL =
+      "https://email-sender-174740019883.asia-south2.run.app/cozy/reservation";
+
+    // On static hosts where /api/ routes aren't available, call backend directly.
+    const url =
+      window.location.hostname === "localhost" ? "/api/cozy-reservation" : BACKEND_URL;
 
     fetch(url, {
       method: "POST",
