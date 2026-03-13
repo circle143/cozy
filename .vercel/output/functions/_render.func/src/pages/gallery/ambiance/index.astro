@@ -1,0 +1,15 @@
+---
+import Categories from "@components/categories/Categories.astro";
+import Gallery from "@components/gallery/Gallery.astro";
+import Hero from "@components/hero/Hero.astro";
+import { ambianceImages } from "@data/gallery";
+import Layout from "@layouts/Layout.astro";
+---
+
+<Layout title="Cozy Lounge - Gallery">
+	<Hero title="Gallery" />
+
+	<Categories page="ambiance" />
+
+	<Gallery images={ambianceImages} />
+</Layout>
