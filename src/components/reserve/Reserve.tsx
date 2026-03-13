@@ -1,3 +1,519 @@
+// // import React, { useState } from "react";
+// // import Calendar from "react-calendar";
+// // import styles from "./reserve.module.scss";
+// // import { validateEmail, validateName, validateNumber } from "./validation";
+// // import { toast, ToastContainer } from "react-toastify";
+// // import "react-toastify/dist/ReactToastify.css";
+// // import { parsePhoneNumberWithError } from "libphonenumber-js";
+
+// // type ValuePiece = Date | null;
+
+// // type Value = ValuePiece | [ValuePiece, ValuePiece];
+
+// // const timeSlots = [
+// // 	{ value: 12, display: "12.00 PM" },
+// // 	{ value: 12, display: "12.30 PM" },
+// // 	{ value: 13, display: "1.00 PM" },
+// // 	{ value: 13, display: "1.30 PM" },
+// // 	{ value: 16, display: "4.00 PM" },
+// // 	{ value: 16, display: "4.30 PM" },
+// // 	{ value: 17, display: "5.00 PM" },
+// // 	{ value: 17, display: "5.30 PM" },
+// // 	{ value: 20, display: "8.00 PM" },
+// // 	{ value: 20, display: "8.30 PM" },
+// // 	{ value: 21, display: "9.00 PM" },
+// // 	{ value: 21, display: "9.30 PM" },
+// // ];
+
+// // interface TimeGuestType {
+// // 	time: string;
+// // 	guest: number;
+// // 	timeError: string;
+// // 	guestError: string;
+// // }
+
+// // interface TimeGuestProps {
+// // 	setTimeGuest: React.Dispatch<React.SetStateAction<TimeGuestType>>;
+// // 	timeGuest: TimeGuestType;
+// // }
+
+// // interface FormInput {
+// // 	name: string;
+// // 	email: string;
+// // 	number: string;
+// // 	info: string;
+// // 	nameError: string;
+// // 	emailError: string;
+// // 	numberError: string;
+// // }
+
+// // interface FinalformProps {
+// // 	formInput: FormInput;
+// // 	setFormInput: React.Dispatch<React.SetStateAction<FormInput>>;
+// // 	children: JSX.Element;
+// // 	handleSubmit: () => void;
+// // 	submitting: boolean;
+// // }
+
+// // const Finalform = ({
+// // 	formInput,
+// // 	setFormInput,
+// // 	children,
+// // 	handleSubmit,
+// // 	submitting,
+// // }: FinalformProps) => {
+// // 	const handleChange = (
+// // 		e:
+// // 			| React.ChangeEvent<HTMLTextAreaElement>
+// // 			| React.ChangeEvent<HTMLInputElement>
+// // 	) => {
+// // 		let key = e.target.name;
+// // 		let value = e.target.value;
+
+// // 		setFormInput((prev) => ({ ...prev, [key]: value }));
+// // 	};
+
+// // 	return (
+// // 		<div className={styles.form}>
+// // 			<form
+// // 				onSubmit={(e) => {
+// // 					e.preventDefault();
+// // 					handleSubmit();
+// // 				}}
+// // 			>
+// // 				<div className={styles.input}>
+// // 					<input
+// // 						type="text"
+// // 						placeholder="Name"
+// // 						onChange={handleChange}
+// // 						value={formInput.name}
+// // 						name="name"
+// // 						required
+// // 						disabled={submitting}
+// // 					/>
+
+// // 					{formInput.nameError && (
+// // 						<p className="error">{formInput.nameError}</p>
+// // 					)}
+// // 				</div>
+
+// // 				<div className={styles.inputGroup}>
+// // 					<div className={styles.input}>
+// // 						<input
+// // 							type="email"
+// // 							placeholder="Email"
+// // 							onChange={handleChange}
+// // 							value={formInput.email}
+// // 							name="email"
+// // 							required
+// // 							disabled={submitting}
+// // 						/>
+// // 						{formInput.emailError && (
+// // 							<p className="error">{formInput.emailError}</p>
+// // 						)}
+// // 					</div>
+// // 					<div className={styles.input}>
+// // 						<input
+// // 							type="text"
+// // 							inputMode="tel"
+// // 							placeholder="Phone number"
+// // 							onChange={handleChange}
+// // 							value={formInput.number}
+// // 							name="number"
+// // 							required
+// // 							disabled={submitting}
+// // 						/>
+// // 						{formInput.numberError && (
+// // 							<p className="error">{formInput.numberError}</p>
+// // 						)}
+// // 					</div>
+// // 				</div>
+
+// // 				<div className={styles.input}>
+// // 					<textarea
+// // 						placeholder="Please provide additional information"
+// // 						onChange={handleChange}
+// // 						value={formInput.info}
+// // 						name="info"
+// // 						disabled={submitting}
+// // 					></textarea>
+// // 				</div>
+
+// // 				{children}
+// // 			</form>
+// // 		</div>
+// // 	);
+// // };
+
+// // const TimeGuest = ({ setTimeGuest, timeGuest }: TimeGuestProps) => {
+// // 	const now = new Date();
+
+// // 	const peopleCount = () => {
+// // 		let elements: React.JSX.Element[] = [];
+
+// // 		for (let i = 1; i <= 8; i++) {
+// // 			elements.push(
+// // 				<button
+// // 					data-selected={timeGuest.guest == i}
+// // 					key={i}
+// // 					onClick={() => {
+// // 						setTimeGuest((prev) => ({
+// // 							...prev,
+// // 							guest: i,
+// // 							guestError: "",
+// // 						}));
+// // 					}}
+// // 				>
+// // 					{i}
+// // 				</button>
+// // 			);
+// // 		}
+// // 		return elements;
+// // 	};
+
+// // 	return (
+// // 		<div className={styles.selectionContainer}>
+// // 			<div className={styles.time}>
+// // 				<h4>TIME</h4>
+// // 				<div className={styles.list}>
+// // 					{timeSlots.map((item) => {
+// // 						return (
+// // 							<button
+// // 								data-selected={item.display === timeGuest.time}
+// // 								key={item.display}
+// // 								disabled={now.getHours() >= item.value}
+// // 								onClick={() =>
+// // 									setTimeGuest((prev) => ({
+// // 										...prev,
+// // 										time: item.display,
+// // 										timeError: "",
+// // 									}))
+// // 								}
+// // 							>
+// // 								{item.display}
+// // 							</button>
+// // 						);
+// // 					})}
+// // 				</div>
+// // 				{timeGuest.timeError && (
+// // 					<p className="error">{timeGuest.timeError}</p>
+// // 				)}
+// // 			</div>
+
+// // 			<div className={styles.guest}>
+// // 				<h4>HOW MANY PEOPLE?</h4>
+// // 				<div className={styles.list}>{peopleCount()}</div>
+// // 				{timeGuest.guestError && (
+// // 					<p className="error">{timeGuest.guestError}</p>
+// // 				)}
+// // 			</div>
+// // 		</div>
+// // 	);
+// // };
+
+// // const Reserve = () => {
+// // 	const [day, onChange] = useState<Value>(new Date());
+// // 	const [step, setStep] = useState<number>(1);
+
+// // 	const [timeGuest, setTimeGuest] = useState<TimeGuestType>({
+// // 		time: "",
+// // 		guest: 0,
+// // 		timeError: "",
+// // 		guestError: "",
+// // 	});
+
+// // 	const [formInput, setFormInput] = useState<FormInput>({
+// // 		name: "",
+// // 		email: "",
+// // 		number: "",
+// // 		info: "",
+// // 		nameError: "",
+// // 		emailError: "",
+// // 		numberError: "",
+// // 	});
+
+// // 	const [submitting, setSubmitting] = useState(false);
+
+// // 	// Get the current date
+// // 	const currentDate = new Date();
+
+// // 	// Add 21 days to the current date
+// // 	const futureDate = new Date(
+// // 		currentDate.getTime() + 21 * 24 * 60 * 60 * 1000
+// // 	);
+
+// // 	const getInfo = (step: number) => {
+// // 		switch (step) {
+// // 			case 1:
+// // 				return "Please Select a date";
+// // 			case 2:
+// // 				return "Select time and guests";
+// // 			case 3:
+// // 				return "Please fill with your details";
+// // 		}
+// // 	};
+
+// // 	const validateForm = () => {
+// // 		if (!validateName(formInput.name)) {
+// // 			setFormInput((prev) => {
+// // 				return { ...prev, nameError: "Invalid name provided." };
+// // 			});
+// // 			return false;
+// // 		}
+
+// // 		if (!validateEmail(formInput.email)) {
+// // 			setFormInput((prev) => {
+// // 				return { ...prev, emailError: "Invalid email provided." };
+// // 			});
+// // 			return false;
+// // 		}
+
+// // 		if (!validateNumber(formInput.number)) {
+// // 			setFormInput((prev) => {
+// // 				return { ...prev, numberError: "Invalid number" };
+// // 			});
+// // 			return false;
+// // 		}
+
+// // 		setFormInput((prev) => {
+// // 			return { ...prev, nameError: "", emailError: "", numberError: "" };
+// // 		});
+// // 		return true;
+// // 	};
+
+// // 	function toE164(phone: string) {
+// // 		try {
+// // 			const phoneNumber = parsePhoneNumberWithError(phone, "IN");
+// // 			if (!phoneNumber.isValid()) {
+// // 				throw new Error("Invalid phone number");
+// // 			}
+// // 			return phoneNumber.number; // Returns in E.164 format
+// // 		} catch (err) {
+// // 			setFormInput((prev) => {
+// // 				return { ...prev, numberError: "Invalid number" };
+// // 			});
+// // 			console.error("Error:", err);
+// // 			return null;
+// // 		}
+// // 	}
+
+// // 	const handleSubmit = () => {
+// // 		// validate final form here
+// // 		if (!validateForm()) {
+// // 			return;
+// // 		}
+
+// // 		let phone = toE164(formInput.number);
+// // 		if (!phone) {
+// // 			return;
+// // 		}
+
+// // 		setSubmitting(true);
+// // 		let body = JSON.stringify({
+// // 			name: formInput.name,
+// // 			date: (day as Date).toDateString(),
+// // 			time: timeGuest.time,
+// // 			guests: timeGuest.guest,
+// // 			email: formInput.email,
+// // 			phone: phone,
+// // 			message: formInput.info,
+// // 		});
+// // 		let url = "https://api-wo48.onrender.com/cozy/reservation";
+
+// // 		fetch(url, {
+// // 			method: "POST",
+// // 			headers: {
+// // 				"Content-Type": "application/json",
+// // 			},
+// // 			body,
+// // 		})
+// // 			.then((res) => res.json())
+// // 			.then((res) => {
+// // 				if (res.error) throw new Error(res.message);
+// // 				toast.success(
+// // 					"Successfully submitted your details " + formInput.name
+// // 				);
+// // 				setFormInput({
+// // 					name: "",
+// // 					email: "",
+// // 					number: "",
+// // 					info: "",
+// // 					nameError: "",
+// // 					emailError: "",
+// // 					numberError: "",
+// // 				});
+// // 				setTimeGuest({
+// // 					time: "",
+// // 					guest: 0,
+// // 					timeError: "",
+// // 					guestError: "",
+// // 				});
+// // 				onChange(new Date());
+// // 				setStep(1);
+// // 			})
+// // 			.catch((err) => {
+// // 				toast.error(err.message);
+// // 			})
+// // 			.finally(() => setSubmitting(false));
+// // 	};
+
+// // 	const getItem = (step: number) => {
+// // 		switch (step) {
+// // 			case 1:
+// // 				return (
+// // 					<div className={styles.calendar}>
+// // 						<Calendar
+// // 							onChange={onChange}
+// // 							value={day}
+// // 							minDate={currentDate}
+// // 							maxDate={futureDate}
+// // 						/>
+// // 					</div>
+// // 				);
+// // 			case 2:
+// // 				return (
+// // 					<TimeGuest
+// // 						setTimeGuest={setTimeGuest}
+// // 						timeGuest={timeGuest}
+// // 					/>
+// // 				);
+// // 			default:
+// // 				return (
+// // 					<Finalform
+// // 						setFormInput={setFormInput}
+// // 						formInput={formInput}
+// // 						handleSubmit={handleSubmit}
+// // 						submitting={submitting}
+// // 					>
+// // 						<div className={styles.infoAction}>
+// // 							{step !== 1 && step <= 3 && !submitting && (
+// // 								<button
+// // 									data-type="button"
+// // 									data-variant="clear"
+// // 									onClick={() => {
+// // 										if (step != 1)
+// // 											setStep((prev) => prev - 1);
+// // 									}}
+// // 									disabled={submitting}
+// // 								>
+// // 									Prev
+// // 								</button>
+// // 							)}
+// // 							<button
+// // 								data-type="button"
+// // 								data-variant="primary"
+// // 								disabled={submitting}
+// // 							>
+// // 								{submitting ? "Submitting" : "Submit"}
+// // 							</button>
+// // 						</div>
+// // 					</Finalform>
+// // 				);
+// // 		}
+// // 	};
+
+// // 	const validateTimeAndGuest = () => {
+// // 		if (timeGuest.time.length === 0) {
+// // 			setTimeGuest((prev) => {
+// // 				return {
+// // 					...prev,
+// // 					timeError: "You need to select time to proceed.",
+// // 				};
+// // 			});
+// // 			return false;
+// // 		}
+
+// // 		if (timeGuest.guest <= 0) {
+// // 			setTimeGuest((prev) => {
+// // 				return {
+// // 					...prev,
+// // 					guestError: "You need to select guest to proceed.",
+// // 				};
+// // 			});
+// // 			return false;
+// // 		}
+
+// // 		setTimeGuest((prev) => {
+// // 			return {
+// // 				...prev,
+// // 				guestError: "",
+// // 				timeError: "",
+// // 			};
+// // 		});
+
+// // 		return true;
+// // 	};
+
+// // 	const handleStep = () => {
+// // 		if (step == 1 && day) {
+// // 			setStep(2);
+// // 			return;
+// // 		}
+
+// // 		if (step == 2) {
+// // 			// validate time and guest
+// // 			if (!validateTimeAndGuest()) {
+// // 				return;
+// // 			}
+// // 			setStep(3);
+// // 			return;
+// // 		}
+// // 	};
+
+// // 	return (
+// // 		<div className={styles.action}>
+// // 			<div className={styles.heading}>
+// // 				<h2 className="clash-display">Reserve a table</h2>
+
+// // 				<p>
+// // 					or Call us at{" "}
+// // 					<a data-type="link" href="tel:9266158606">
+// // 						+91 9266158606
+// // 					</a>
+// // 				</p>
+// // 			</div>
+
+// // 			<div className={styles.info}>
+// // 				<div className={styles.detail}>
+// // 					<p>
+// // 						<span>{step} / 3 </span>
+// // 						{getInfo(step)}
+// // 					</p>
+// // 				</div>
+
+// // 				<div className={styles.step}>{getItem(step)}</div>
+
+// // 				{step != 3 && (
+// // 					<div className={styles.infoAction}>
+// // 						{step !== 1 && step <= 3 && (
+// // 							<button
+// // 								data-type="button"
+// // 								data-variant="clear"
+// // 								onClick={() => {
+// // 									if (step != 1) setStep((prev) => prev - 1);
+// // 								}}
+// // 							>
+// // 								Prev
+// // 							</button>
+// // 						)}
+// // 						<button
+// // 							data-type="button"
+// // 							data-variant="primary"
+// // 							onClick={handleStep}
+// // 						>
+// // 							{step == 3 ? "Submit" : "Next"}
+// // 						</button>
+// // 					</div>
+// // 				)}
+// // 			</div>
+
+// // 			<ToastContainer />
+// // 		</div>
+// // 	);
+// // };
+
+// // export default Reserve;
+
 // import React, { useState } from "react";
 // import Calendar from "react-calendar";
 // import styles from "./reserve.module.scss";
@@ -7,512 +523,559 @@
 // import { parsePhoneNumberWithError } from "libphonenumber-js";
 
 // type ValuePiece = Date | null;
-
 // type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 // const timeSlots = [
-// 	{ value: 12, display: "12.00 PM" },
-// 	{ value: 12, display: "12.30 PM" },
-// 	{ value: 13, display: "1.00 PM" },
-// 	{ value: 13, display: "1.30 PM" },
-// 	{ value: 16, display: "4.00 PM" },
-// 	{ value: 16, display: "4.30 PM" },
-// 	{ value: 17, display: "5.00 PM" },
-// 	{ value: 17, display: "5.30 PM" },
-// 	{ value: 20, display: "8.00 PM" },
-// 	{ value: 20, display: "8.30 PM" },
-// 	{ value: 21, display: "9.00 PM" },
-// 	{ value: 21, display: "9.30 PM" },
+//   { value: 12, display: "12.00 PM" },
+//   { value: 12, display: "12.30 PM" },
+//   { value: 13, display: "1.00 PM" },
+//   { value: 13, display: "1.30 PM" },
+//   { value: 16, display: "4.00 PM" },
+//   { value: 16, display: "4.30 PM" },
+//   { value: 17, display: "5.00 PM" },
+//   { value: 17, display: "5.30 PM" },
+//   { value: 20, display: "8.00 PM" },
+//   { value: 20, display: "8.30 PM" },
+//   { value: 21, display: "9.00 PM" },
+//   { value: 21, display: "9.30 PM" },
 // ];
 
 // interface TimeGuestType {
-// 	time: string;
-// 	guest: number;
-// 	timeError: string;
-// 	guestError: string;
+//   time: string;
+//   guest: number;
+//   timeError: string;
+//   guestError: string;
 // }
 
 // interface TimeGuestProps {
-// 	setTimeGuest: React.Dispatch<React.SetStateAction<TimeGuestType>>;
-// 	timeGuest: TimeGuestType;
+//   setTimeGuest: React.Dispatch<React.SetStateAction<TimeGuestType>>;
+//   timeGuest: TimeGuestType;
 // }
 
 // interface FormInput {
-// 	name: string;
-// 	email: string;
-// 	number: string;
-// 	info: string;
-// 	nameError: string;
-// 	emailError: string;
-// 	numberError: string;
+//   name: string;
+//   email: string;
+//   number: string;
+//   info: string;
+//   nameError: string;
+//   emailError: string;
+//   numberError: string;
 // }
 
 // interface FinalformProps {
-// 	formInput: FormInput;
-// 	setFormInput: React.Dispatch<React.SetStateAction<FormInput>>;
-// 	children: JSX.Element;
-// 	handleSubmit: () => void;
-// 	submitting: boolean;
+//   formInput: FormInput;
+//   setFormInput: React.Dispatch<React.SetStateAction<FormInput>>;
+//   children: JSX.Element;
+//   handleSubmit: () => void;
+//   submitting: boolean;
 // }
 
 // const Finalform = ({
-// 	formInput,
-// 	setFormInput,
-// 	children,
-// 	handleSubmit,
-// 	submitting,
+//   formInput,
+//   setFormInput,
+//   children,
+//   handleSubmit,
+//   submitting,
 // }: FinalformProps) => {
-// 	const handleChange = (
-// 		e:
-// 			| React.ChangeEvent<HTMLTextAreaElement>
-// 			| React.ChangeEvent<HTMLInputElement>
-// 	) => {
-// 		let key = e.target.name;
-// 		let value = e.target.value;
+//   const handleChange = (
+//     e:
+//       | React.ChangeEvent<HTMLTextAreaElement>
+//       | React.ChangeEvent<HTMLInputElement>,
+//   ) => {
+//     let key = e.target.name;
+//     let value = e.target.value;
 
-// 		setFormInput((prev) => ({ ...prev, [key]: value }));
-// 	};
+//     setFormInput((prev) => ({ ...prev, [key]: value }));
+//   };
 
-// 	return (
-// 		<div className={styles.form}>
-// 			<form
-// 				onSubmit={(e) => {
-// 					e.preventDefault();
-// 					handleSubmit();
-// 				}}
-// 			>
-// 				<div className={styles.input}>
-// 					<input
-// 						type="text"
-// 						placeholder="Name"
-// 						onChange={handleChange}
-// 						value={formInput.name}
-// 						name="name"
-// 						required
-// 						disabled={submitting}
-// 					/>
+//   return (
+//     <div className={styles.form}>
+//       <form
+//         onSubmit={(e) => {
+//           e.preventDefault();
+//           handleSubmit();
+//         }}
+//       >
+//         <div className={styles.input}>
+//           <input
+//             type="text"
+//             placeholder="Name"
+//             onChange={handleChange}
+//             value={formInput.name}
+//             name="name"
+//             required
+//             disabled={submitting}
+//           />
 
-// 					{formInput.nameError && (
-// 						<p className="error">{formInput.nameError}</p>
-// 					)}
-// 				</div>
+//           {formInput.nameError && (
+//             <p className="error">{formInput.nameError}</p>
+//           )}
+//         </div>
 
-// 				<div className={styles.inputGroup}>
-// 					<div className={styles.input}>
-// 						<input
-// 							type="email"
-// 							placeholder="Email"
-// 							onChange={handleChange}
-// 							value={formInput.email}
-// 							name="email"
-// 							required
-// 							disabled={submitting}
-// 						/>
-// 						{formInput.emailError && (
-// 							<p className="error">{formInput.emailError}</p>
-// 						)}
-// 					</div>
-// 					<div className={styles.input}>
-// 						<input
-// 							type="text"
-// 							inputMode="tel"
-// 							placeholder="Phone number"
-// 							onChange={handleChange}
-// 							value={formInput.number}
-// 							name="number"
-// 							required
-// 							disabled={submitting}
-// 						/>
-// 						{formInput.numberError && (
-// 							<p className="error">{formInput.numberError}</p>
-// 						)}
-// 					</div>
-// 				</div>
+//         <div className={styles.inputGroup}>
+//           <div className={styles.input}>
+//             <input
+//               type="email"
+//               placeholder="Email"
+//               onChange={handleChange}
+//               value={formInput.email}
+//               name="email"
+//               required
+//               disabled={submitting}
+//             />
+//             {formInput.emailError && (
+//               <p className="error">{formInput.emailError}</p>
+//             )}
+//           </div>
+//           <div className={styles.input}>
+//             <input
+//               type="text"
+//               inputMode="tel"
+//               placeholder="Phone number"
+//               onChange={handleChange}
+//               value={formInput.number}
+//               name="number"
+//               required
+//               disabled={submitting}
+//             />
+//             {formInput.numberError && (
+//               <p className="error">{formInput.numberError}</p>
+//             )}
+//           </div>
+//         </div>
 
-// 				<div className={styles.input}>
-// 					<textarea
-// 						placeholder="Please provide additional information"
-// 						onChange={handleChange}
-// 						value={formInput.info}
-// 						name="info"
-// 						disabled={submitting}
-// 					></textarea>
-// 				</div>
+//         <div className={styles.input}>
+//           <textarea
+//             placeholder="Please provide additional information"
+//             onChange={handleChange}
+//             value={formInput.info}
+//             name="info"
+//             disabled={submitting}
+//           ></textarea>
+//         </div>
 
-// 				{children}
-// 			</form>
-// 		</div>
-// 	);
+//         {children}
+//       </form>
+//     </div>
+//   );
 // };
 
 // const TimeGuest = ({ setTimeGuest, timeGuest }: TimeGuestProps) => {
-// 	const now = new Date();
+//   const now = new Date();
 
-// 	const peopleCount = () => {
-// 		let elements: React.JSX.Element[] = [];
+//   const peopleCount = () => {
+//     let elements: React.JSX.Element[] = [];
 
-// 		for (let i = 1; i <= 8; i++) {
-// 			elements.push(
-// 				<button
-// 					data-selected={timeGuest.guest == i}
-// 					key={i}
-// 					onClick={() => {
-// 						setTimeGuest((prev) => ({
-// 							...prev,
-// 							guest: i,
-// 							guestError: "",
-// 						}));
-// 					}}
-// 				>
-// 					{i}
-// 				</button>
-// 			);
-// 		}
-// 		return elements;
-// 	};
+//     for (let i = 1; i <= 8; i++) {
+//       elements.push(
+//         <button
+//           data-selected={timeGuest.guest == i}
+//           key={i}
+//           onClick={() => {
+//             setTimeGuest((prev) => ({
+//               ...prev,
+//               guest: i,
+//               guestError: "",
+//             }));
+//           }}
+//         >
+//           {i}
+//         </button>,
+//       );
+//     }
+//     return elements;
+//   };
 
-// 	return (
-// 		<div className={styles.selectionContainer}>
-// 			<div className={styles.time}>
-// 				<h4>TIME</h4>
-// 				<div className={styles.list}>
-// 					{timeSlots.map((item) => {
-// 						return (
-// 							<button
-// 								data-selected={item.display === timeGuest.time}
-// 								key={item.display}
-// 								disabled={now.getHours() >= item.value}
-// 								onClick={() =>
-// 									setTimeGuest((prev) => ({
-// 										...prev,
-// 										time: item.display,
-// 										timeError: "",
-// 									}))
-// 								}
-// 							>
-// 								{item.display}
-// 							</button>
-// 						);
-// 					})}
-// 				</div>
-// 				{timeGuest.timeError && (
-// 					<p className="error">{timeGuest.timeError}</p>
-// 				)}
-// 			</div>
+//   return (
+//     <div className={styles.selectionContainer}>
+//       <div className={styles.time}>
+//         <h4>TIME</h4>
+//         <div className={styles.list}>
+//           {timeSlots.map((item) => {
+//             return (
+//               <button
+//                 data-selected={item.display === timeGuest.time}
+//                 key={item.display}
+//                 disabled={now.getHours() >= item.value}
+//                 onClick={() =>
+//                   setTimeGuest((prev) => ({
+//                     ...prev,
+//                     time: item.display,
+//                     timeError: "",
+//                   }))
+//                 }
+//               >
+//                 {item.display}
+//               </button>
+//             );
+//           })}
+//         </div>
+//         {timeGuest.timeError && <p className="error">{timeGuest.timeError}</p>}
+//       </div>
 
-// 			<div className={styles.guest}>
-// 				<h4>HOW MANY PEOPLE?</h4>
-// 				<div className={styles.list}>{peopleCount()}</div>
-// 				{timeGuest.guestError && (
-// 					<p className="error">{timeGuest.guestError}</p>
-// 				)}
-// 			</div>
-// 		</div>
-// 	);
+//       <div className={styles.guest}>
+//         <h4>HOW MANY PEOPLE?</h4>
+//         <div className={styles.list}>{peopleCount()}</div>
+//         {timeGuest.guestError && (
+//           <p className="error">{timeGuest.guestError}</p>
+//         )}
+//       </div>
+//     </div>
+//   );
 // };
 
 // const Reserve = () => {
-// 	const [day, onChange] = useState<Value>(new Date());
-// 	const [step, setStep] = useState<number>(1);
+//   const [day, onChange] = useState<Value>(new Date());
+//   const [step, setStep] = useState<number>(1);
 
-// 	const [timeGuest, setTimeGuest] = useState<TimeGuestType>({
-// 		time: "",
-// 		guest: 0,
-// 		timeError: "",
-// 		guestError: "",
-// 	});
+//   const [timeGuest, setTimeGuest] = useState<TimeGuestType>({
+//     time: "",
+//     guest: 0,
+//     timeError: "",
+//     guestError: "",
+//   });
 
-// 	const [formInput, setFormInput] = useState<FormInput>({
-// 		name: "",
-// 		email: "",
-// 		number: "",
-// 		info: "",
-// 		nameError: "",
-// 		emailError: "",
-// 		numberError: "",
-// 	});
+//   const [formInput, setFormInput] = useState<FormInput>({
+//     name: "",
+//     email: "",
+//     number: "",
+//     info: "",
+//     nameError: "",
+//     emailError: "",
+//     numberError: "",
+//   });
 
-// 	const [submitting, setSubmitting] = useState(false);
+//   const [submitting, setSubmitting] = useState(false);
 
-// 	// Get the current date
-// 	const currentDate = new Date();
+//   // Get the current date
+//   const currentDate = new Date();
 
-// 	// Add 21 days to the current date
-// 	const futureDate = new Date(
-// 		currentDate.getTime() + 21 * 24 * 60 * 60 * 1000
-// 	);
+//   // Add 21 days to the current date
+//   const futureDate = new Date(currentDate.getTime() + 21 * 24 * 60 * 60 * 1000);
 
-// 	const getInfo = (step: number) => {
-// 		switch (step) {
-// 			case 1:
-// 				return "Please Select a date";
-// 			case 2:
-// 				return "Select time and guests";
-// 			case 3:
-// 				return "Please fill with your details";
-// 		}
-// 	};
+//   const getInfo = (step: number) => {
+//     switch (step) {
+//       case 1:
+//         return "Please Select a date";
+//       case 2:
+//         return "Select time and guests";
+//       case 3:
+//         return "Please fill with your details";
+//     }
+//   };
 
-// 	const validateForm = () => {
-// 		if (!validateName(formInput.name)) {
-// 			setFormInput((prev) => {
-// 				return { ...prev, nameError: "Invalid name provided." };
-// 			});
-// 			return false;
-// 		}
+//   const validateForm = () => {
+//     if (!validateName(formInput.name)) {
+//       setFormInput((prev) => {
+//         return { ...prev, nameError: "Invalid name provided." };
+//       });
+//       return false;
+//     }
 
-// 		if (!validateEmail(formInput.email)) {
-// 			setFormInput((prev) => {
-// 				return { ...prev, emailError: "Invalid email provided." };
-// 			});
-// 			return false;
-// 		}
+//     if (!validateEmail(formInput.email)) {
+//       setFormInput((prev) => {
+//         return { ...prev, emailError: "Invalid email provided." };
+//       });
+//       return false;
+//     }
 
-// 		if (!validateNumber(formInput.number)) {
-// 			setFormInput((prev) => {
-// 				return { ...prev, numberError: "Invalid number" };
-// 			});
-// 			return false;
-// 		}
+//     if (!validateNumber(formInput.number)) {
+//       setFormInput((prev) => {
+//         return { ...prev, numberError: "Invalid number" };
+//       });
+//       return false;
+//     }
 
-// 		setFormInput((prev) => {
-// 			return { ...prev, nameError: "", emailError: "", numberError: "" };
-// 		});
-// 		return true;
-// 	};
+//     setFormInput((prev) => {
+//       return { ...prev, nameError: "", emailError: "", numberError: "" };
+//     });
+//     return true;
+//   };
 
-// 	function toE164(phone: string) {
-// 		try {
-// 			const phoneNumber = parsePhoneNumberWithError(phone, "IN");
-// 			if (!phoneNumber.isValid()) {
-// 				throw new Error("Invalid phone number");
-// 			}
-// 			return phoneNumber.number; // Returns in E.164 format
-// 		} catch (err) {
-// 			setFormInput((prev) => {
-// 				return { ...prev, numberError: "Invalid number" };
-// 			});
-// 			console.error("Error:", err);
-// 			return null;
-// 		}
-// 	}
+//   function toE164(phone: string) {
+//     try {
+//       const phoneNumber = parsePhoneNumberWithError(phone, "IN");
+//       if (!phoneNumber.isValid()) {
+//         throw new Error("Invalid phone number");
+//       }
+//       return phoneNumber.number; // Returns in E.164 format
+//     } catch (err) {
+//       setFormInput((prev) => {
+//         return { ...prev, numberError: "Invalid number" };
+//       });
+//       console.error("Error:", err);
+//       return null;
+//     }
+//   }
 
-// 	const handleSubmit = () => {
-// 		// validate final form here
-// 		if (!validateForm()) {
-// 			return;
-// 		}
+//   const handleSubmit = () => {
+//     // validate final form here
+//     if (!validateForm()) {
+//       return;
+//     }
 
-// 		let phone = toE164(formInput.number);
-// 		if (!phone) {
-// 			return;
-// 		}
+//     let phone = toE164(formInput.number);
+//     if (!phone) {
+//       return;
+//     }
 
-// 		setSubmitting(true);
-// 		let body = JSON.stringify({
-// 			name: formInput.name,
-// 			date: (day as Date).toDateString(),
-// 			time: timeGuest.time,
-// 			guests: timeGuest.guest,
-// 			email: formInput.email,
-// 			phone: phone,
-// 			message: formInput.info,
-// 		});
-// 		let url = "https://api-wo48.onrender.com/cozy/reservation";
+//     setSubmitting(true);
 
-// 		fetch(url, {
-// 			method: "POST",
-// 			headers: {
-// 				"Content-Type": "application/json",
-// 			},
-// 			body,
-// 		})
-// 			.then((res) => res.json())
-// 			.then((res) => {
-// 				if (res.error) throw new Error(res.message);
-// 				toast.success(
-// 					"Successfully submitted your details " + formInput.name
-// 				);
-// 				setFormInput({
-// 					name: "",
-// 					email: "",
-// 					number: "",
-// 					info: "",
-// 					nameError: "",
-// 					emailError: "",
-// 					numberError: "",
-// 				});
-// 				setTimeGuest({
-// 					time: "",
-// 					guest: 0,
-// 					timeError: "",
-// 					guestError: "",
-// 				});
-// 				onChange(new Date());
-// 				setStep(1);
-// 			})
-// 			.catch((err) => {
-// 				toast.error(err.message);
-// 			})
-// 			.finally(() => setSubmitting(false));
-// 	};
+//     // Create clean payload
+//     const payload = {
+//       name: formInput.name,
+//       date: (day as Date).toDateString(),
+//       time: timeGuest.time,
+//       guests: timeGuest.guest || 1,
+//       email: formInput.email,
+//       phone: phone,
+//       message: formInput.info || "No additional information",
+//     };
 
-// 	const getItem = (step: number) => {
-// 		switch (step) {
-// 			case 1:
-// 				return (
-// 					<div className={styles.calendar}>
-// 						<Calendar
-// 							onChange={onChange}
-// 							value={day}
-// 							minDate={currentDate}
-// 							maxDate={futureDate}
-// 						/>
-// 					</div>
-// 				);
-// 			case 2:
-// 				return (
-// 					<TimeGuest
-// 						setTimeGuest={setTimeGuest}
-// 						timeGuest={timeGuest}
-// 					/>
-// 				);
-// 			default:
-// 				return (
-// 					<Finalform
-// 						setFormInput={setFormInput}
-// 						formInput={formInput}
-// 						handleSubmit={handleSubmit}
-// 						submitting={submitting}
-// 					>
-// 						<div className={styles.infoAction}>
-// 							{step !== 1 && step <= 3 && !submitting && (
-// 								<button
-// 									data-type="button"
-// 									data-variant="clear"
-// 									onClick={() => {
-// 										if (step != 1)
-// 											setStep((prev) => prev - 1);
-// 									}}
-// 									disabled={submitting}
-// 								>
-// 									Prev
-// 								</button>
-// 							)}
-// 							<button
-// 								data-type="button"
-// 								data-variant="primary"
-// 								disabled={submitting}
-// 							>
-// 								{submitting ? "Submitting" : "Submit"}
-// 							</button>
-// 						</div>
-// 					</Finalform>
-// 				);
-// 		}
-// 	};
+//     console.log("📦 Payload:", payload);
 
-// 	const validateTimeAndGuest = () => {
-// 		if (timeGuest.time.length === 0) {
-// 			setTimeGuest((prev) => {
-// 				return {
-// 					...prev,
-// 					timeError: "You need to select time to proceed.",
-// 				};
-// 			});
-// 			return false;
-// 		}
+//     const BACKEND_URL =
+//       "https://email-sender-174740019883.asia-south2.run.app/cozy/reservation";
 
-// 		if (timeGuest.guest <= 0) {
-// 			setTimeGuest((prev) => {
-// 				return {
-// 					...prev,
-// 					guestError: "You need to select guest to proceed.",
-// 				};
-// 			});
-// 			return false;
-// 		}
+//     // On static hosts where /api/ routes aren't available, call backend directly.
+//     const url =
+//       window.location.hostname === "localhost"
+//         ? "/api/cozy-reservation"
+//         : BACKEND_URL;
 
-// 		setTimeGuest((prev) => {
-// 			return {
-// 				...prev,
-// 				guestError: "",
-// 				timeError: "",
-// 			};
-// 		});
+//     fetch(url, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(payload),
+//     })
+//       .then(async (res) => {
+//         console.log("📥 Response status:", res.status);
 
-// 		return true;
-// 	};
+//         const text = await res.text();
+//         console.log("📥 Response text:", text);
 
-// 	const handleStep = () => {
-// 		if (step == 1 && day) {
-// 			setStep(2);
-// 			return;
-// 		}
+//         if (!text) {
+//           return { success: true };
+//         }
 
-// 		if (step == 2) {
-// 			// validate time and guest
-// 			if (!validateTimeAndGuest()) {
-// 				return;
-// 			}
-// 			setStep(3);
-// 			return;
-// 		}
-// 	};
+//         try {
+//           return JSON.parse(text);
+//         } catch (e) {
+//           console.log("⚠️ Not JSON, treating as success");
+//           return { success: true };
+//         }
+//       })
+//       .then((res) => {
+//         console.log("✅ Success:", res);
+//         toast.success("Thank you! Your reservation has been received.");
 
-// 	return (
-// 		<div className={styles.action}>
-// 			<div className={styles.heading}>
-// 				<h2 className="clash-display">Reserve a table</h2>
+//         // Reset form
+//         setFormInput({
+//           name: "",
+//           email: "",
+//           number: "",
+//           info: "",
+//           nameError: "",
+//           emailError: "",
+//           numberError: "",
+//         });
+//         setTimeGuest({
+//           time: "",
+//           guest: 0,
+//           timeError: "",
+//           guestError: "",
+//         });
+//         onChange(new Date());
+//         setStep(1);
+//       })
+//       .catch((err) => {
+//         console.error("❌ Error:", err);
+//         toast.error("❌ Something went wrong. Please try again.");
 
-// 				<p>
-// 					or Call us at{" "}
-// 					<a data-type="link" href="tel:9266158606">
-// 						+91 9266158606
-// 					</a>
-// 				</p>
-// 			</div>
+//         // Reset form anyway
+//         setFormInput({
+//           name: "",
+//           email: "",
+//           number: "",
+//           info: "",
+//           nameError: "",
+//           emailError: "",
+//           numberError: "",
+//         });
+//         setTimeGuest({
+//           time: "",
+//           guest: 0,
+//           timeError: "",
+//           guestError: "",
+//         });
+//         onChange(new Date());
+//         setStep(1);
+//       })
+//       .finally(() => setSubmitting(false));
+//   };
 
-// 			<div className={styles.info}>
-// 				<div className={styles.detail}>
-// 					<p>
-// 						<span>{step} / 3 </span>
-// 						{getInfo(step)}
-// 					</p>
-// 				</div>
+//   const getItem = (step: number) => {
+//     switch (step) {
+//       case 1:
+//         return (
+//           <div className={styles.calendar}>
+//             <Calendar
+//               onChange={onChange}
+//               value={day}
+//               minDate={currentDate}
+//               maxDate={futureDate}
+//             />
+//           </div>
+//         );
+//       case 2:
+//         return <TimeGuest setTimeGuest={setTimeGuest} timeGuest={timeGuest} />;
+//       default:
+//         return (
+//           <Finalform
+//             setFormInput={setFormInput}
+//             formInput={formInput}
+//             handleSubmit={handleSubmit}
+//             submitting={submitting}
+//           >
+//             <div className={styles.infoAction}>
+//               {step !== 1 && step <= 3 && !submitting && (
+//                 <button
+//                   data-type="button"
+//                   data-variant="clear"
+//                   onClick={() => {
+//                     if (step != 1) setStep((prev) => prev - 1);
+//                   }}
+//                   disabled={submitting}
+//                 >
+//                   Prev
+//                 </button>
+//               )}
+//               <button
+//                 type="submit"
+//                 data-type="button"
+//                 data-variant="primary"
+//                 disabled={submitting}
+//               >
+//                 {submitting ? "Submitting..." : "Submit"}
+//               </button>
+//             </div>
+//           </Finalform>
+//         );
+//     }
+//   };
 
-// 				<div className={styles.step}>{getItem(step)}</div>
+//   const validateTimeAndGuest = () => {
+//     if (timeGuest.time.length === 0) {
+//       setTimeGuest((prev) => {
+//         return {
+//           ...prev,
+//           timeError: "You need to select time to proceed.",
+//         };
+//       });
+//       return false;
+//     }
 
-// 				{step != 3 && (
-// 					<div className={styles.infoAction}>
-// 						{step !== 1 && step <= 3 && (
-// 							<button
-// 								data-type="button"
-// 								data-variant="clear"
-// 								onClick={() => {
-// 									if (step != 1) setStep((prev) => prev - 1);
-// 								}}
-// 							>
-// 								Prev
-// 							</button>
-// 						)}
-// 						<button
-// 							data-type="button"
-// 							data-variant="primary"
-// 							onClick={handleStep}
-// 						>
-// 							{step == 3 ? "Submit" : "Next"}
-// 						</button>
-// 					</div>
-// 				)}
-// 			</div>
+//     if (timeGuest.guest <= 0) {
+//       setTimeGuest((prev) => {
+//         return {
+//           ...prev,
+//           guestError: "You need to select guest to proceed.",
+//         };
+//       });
+//       return false;
+//     }
 
-// 			<ToastContainer />
-// 		</div>
-// 	);
+//     setTimeGuest((prev) => {
+//       return {
+//         ...prev,
+//         guestError: "",
+//         timeError: "",
+//       };
+//     });
+
+//     return true;
+//   };
+
+//   const handleStep = () => {
+//     if (step == 1 && day) {
+//       setStep(2);
+//       return;
+//     }
+
+//     if (step == 2) {
+//       // validate time and guest
+//       if (!validateTimeAndGuest()) {
+//         return;
+//       }
+//       setStep(3);
+//       return;
+//     }
+//   };
+
+//   return (
+//     <div className={styles.action}>
+//       <div className={styles.heading}>
+//         <h2 className="clash-display">Reserve a table</h2>
+
+//         <p>
+//           or Call us at{" "}
+//           <a data-type="link" href="tel:9266158606">
+//             +91 9266158606
+//           </a>
+//         </p>
+//       </div>
+
+//       <div className={styles.info}>
+//         <div className={styles.detail}>
+//           <p>
+//             <span>{step} / 3 </span>
+//             {getInfo(step)}
+//           </p>
+//         </div>
+
+//         <div className={styles.step}>{getItem(step)}</div>
+
+//         {step != 3 && (
+//           <div className={styles.infoAction}>
+//             {step !== 1 && step <= 3 && (
+//               <button
+//                 data-type="button"
+//                 data-variant="clear"
+//                 onClick={() => {
+//                   if (step != 1) setStep((prev) => prev - 1);
+//                 }}
+//               >
+//                 Prev
+//               </button>
+//             )}
+//             <button
+//               data-type="button"
+//               data-variant="primary"
+//               onClick={handleStep}
+//             >
+//               {step == 3 ? "Submit" : "Next"}
+//             </button>
+//           </div>
+//         )}
+//       </div>
+
+//       <ToastContainer />
+//     </div>
+//   );
 // };
 
 // export default Reserve;
+
+
+
+
+
+
+
+
+
 
 import React, { useState } from "react";
 import Calendar from "react-calendar";
@@ -834,12 +1397,23 @@ const Reserve = () => {
 
     console.log("📦 Payload:", payload);
 
-    const BACKEND_URL =
-      "https://email-sender-174740019883.asia-south2.run.app/cozy/reservation";
-
-    // On static hosts where /api/ routes aren't available, call backend directly.
-    const url =
-      window.location.hostname === "localhost" ? "/api/cozy-reservation" : BACKEND_URL;
+    // FIXED: More reliable URL detection
+    const isLocalhost = window.location.hostname === "localhost" || 
+                        window.location.hostname === "127.0.0.1";
+    
+    // Your backend URL
+    const BACKEND_URL = "https://email-sender-174740019883.asia-south2.run.app/cozy/reservation";
+    
+    // Determine which URL to use
+    let url;
+    if (isLocalhost) {
+      url = "/api/cozy-reservation";
+    } else {
+      url = BACKEND_URL;
+    }
+    
+    console.log("📍 Hostname:", window.location.hostname);
+    console.log("📍 Using URL:", url);
 
     fetch(url, {
       method: "POST",
@@ -853,6 +1427,10 @@ const Reserve = () => {
 
         const text = await res.text();
         console.log("📥 Response text:", text);
+
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
 
         if (!text) {
           return { success: true };
@@ -891,25 +1469,6 @@ const Reserve = () => {
       .catch((err) => {
         console.error("❌ Error:", err);
         toast.error("❌ Something went wrong. Please try again.");
-
-        // Reset form anyway
-        setFormInput({
-          name: "",
-          email: "",
-          number: "",
-          info: "",
-          nameError: "",
-          emailError: "",
-          numberError: "",
-        });
-        setTimeGuest({
-          time: "",
-          guest: 0,
-          timeError: "",
-          guestError: "",
-        });
-        onChange(new Date());
-        setStep(1);
       })
       .finally(() => setSubmitting(false));
   };
