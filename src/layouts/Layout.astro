@@ -4,30 +4,130 @@ import "../styles/main.scss";
 import Footer from "../components/Footer/Footer.astro";
 import Nav from "../components/nav/Nav.astro";
 
+import { business, SITE_NAME, DEFAULT_DESCRIPTION } from "../data/seo";
+
 interface Props {
 	title: string;
+	/** Short page key used for nav styling, e.g. "home" */
+	page?: string;
+	description?: string;
+	/** Path or absolute URL of the social share image (1200x630 recommended) */
+	image?: string;
+	imageAlt?: string;
+	noindex?: boolean;
 }
 
-const { title } = Astro.props;
+const {
+	title,
+	page = "",
+	description = DEFAULT_DESCRIPTION,
+	image = "/og-image.jpg",
+	imageAlt = "Neon-lit interior and stage at Cozy - The Casual Lounge, Noida",
+	noindex = false,
+} = Astro.props;
+
+const site = Astro.site ?? new URL(Astro.url.origin);
+const canonicalURL = new URL(Astro.url.pathname, site);
+const imageURL = new URL(image, site);
+
+const restaurantSchema = {
+	"@context": "https://schema.org",
+	"@type": ["Restaurant", "BarOrPub"],
+	"@id": new URL("/#restaurant", site).href,
+	name: business.name,
+	alternateName: business.alternateName,
+	description: DEFAULT_DESCRIPTION,
+	url: site.href,
+	logo: new URL("/logo.svg", site).href,
+	image: [imageURL.href],
+	telephone: business.phone,
+	email: business.email,
+	priceRange: business.priceRange,
+	servesCuisine: business.cuisines,
+	acceptsReservations: new URL("/reservation", site).href,
+	hasMenu: new URL("/menu", site).href,
+	address: {
+		"@type": "PostalAddress",
+		...business.address,
+	},
+	geo: {
+		"@type": "GeoCoordinates",
+		...business.geo,
+	},
+	hasMap: business.mapUrl,
+	openingHoursSpecification: [
+		{
+			"@type": "OpeningHoursSpecification",
+			dayOfWeek: [
+				"Monday",
+				"Tuesday",
+				"Wednesday",
+				"Thursday",
+				"Friday",
+				"Saturday",
+				"Sunday",
+			],
+			opens: business.opens,
+			closes: business.closes,
+		},
+	],
+	sameAs: business.sameAs,
+};
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en-IN">
 	<head>
 		<meta charset="UTF-8" />
-		<meta
-			name="description"
-			content="Cozy - The Casual Lounge isn't just a place to eat! It's a haven for relaxation and enjoyment, featuring comforting dishes with a touch of casual elegance, set in a warm and inviting atmosphere."
-		/>
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonicalURL} />
+		<meta
+			name="robots"
+			content={noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large"}
+		/>
+		<meta name="theme-color" content="#000000" />
+		<meta name="format-detection" content="telephone=yes" />
+
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
+		<!-- Open Graph -->
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content={SITE_NAME} />
+		<meta property="og:locale" content="en_IN" />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={imageURL} />
+		<meta property="og:image:secure_url" content={imageURL} />
+		<meta property="og:image:type" content="image/jpeg" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content={imageAlt} />
+
+		<!-- Twitter / X -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={imageURL} />
+		<meta name="twitter:image:alt" content={imageAlt} />
+
+		<!-- Structured data -->
+		<script
+			is:inline
+			type="application/ld+json"
+			set:html={JSON.stringify(restaurantSchema)}
+		/>
 
 		<ViewTransitions />
 	</head>
 	<body>
 		<div>
-			<Nav title={title} />
+			<Nav page={page} />
 			<main>
 				<slot />
 			</main>

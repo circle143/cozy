@@ -7,7 +7,7 @@
 	right: 0;
 	z-index: 10;
 
-	&[data-page="Cozy Lounge - Home"] {
+	&[data-page="home"] {
 		@include ab.hero {
 			display: none;
 		}

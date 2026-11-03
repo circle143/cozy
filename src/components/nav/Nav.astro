@@ -1,9 +1,9 @@
 ---
 interface Props {
-	title: string;
+	page: string;
 }
 
-const { title } = Astro.props;
+const { page } = Astro.props;
 
 import styles from "./nav.module.scss";
 
@@ -27,7 +27,7 @@ const links = [
 ];
 ---
 
-<nav class={styles.nav} data-page={title}>
+<nav class={styles.nav} data-page={page}>
 	<div class={`container ${styles.container}`}>
 		<div class={styles.logo}>
 			<a href="/"><img src="/logo.svg" alt="Cozy Lounge" /> </a>
